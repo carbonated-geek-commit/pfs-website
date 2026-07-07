@@ -1,6 +1,8 @@
 # Peninsula Fermentation Society — Website
 
-Static site for [peninsulafermentation.org](https://www.peninsulafermentation.org), built with [Eleventy](https://www.11ty.dev/) from the design in `design_handoff_pfs_website/`. One responsive site: desktop and mobile are breakpoints of the same pages.
+Static site for [peninsulafermentation.org](https://www.peninsulafermentation.org), built with [Eleventy](https://www.11ty.dev/) from the design in `design_handoff_pfs_website/`. One responsive site: desktop and mobile are breakpoints of the same pages — phones automatically get the mobile layout at the regular URL.
+
+**Mobile preview for desktop viewers:** [`/mobile/`](https://carbonated-geek-commit.github.io/pfs-website/mobile/) shows the site in a 390px phone frame so you can review the mobile design from a desktop browser. Opened on an actual mobile-size screen, it redirects to the regular site (which is already mobile there).
 
 ## Local development
 
