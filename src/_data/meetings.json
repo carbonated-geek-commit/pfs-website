@@ -1,0 +1,36 @@
+[
+  {
+    "date": "2026-06-02",
+    "education": "BJCP Cider Scoresheets",
+    "style": { "text": "1D: American Wheat" },
+    "challenge": { "text": "Cider — BJCP C1–C4" }
+  },
+  {
+    "date": "2026-07-07",
+    "education": "Hops — varieties, usage & timing",
+    "style": {
+      "text": "Kentucky Common (historical)",
+      "home": {
+        "before": "",
+        "linkText": "Kentucky Common",
+        "linkUrl": "https://www.bjcp.org/style/2021/27/27A/historical-beer-kentucky-common/",
+        "after": " — historical beer"
+      }
+    },
+    "challenge": {
+      "text": "BOS Same-Recipe — 1C: Cream Ale",
+      "home": {
+        "before": "BOS Same-Recipe Challenge — ",
+        "linkText": "1C: Cream Ale",
+        "linkUrl": "https://www.bjcp.org/style/2021/1/1C/cream-ale/",
+        "after": ""
+      }
+    }
+  },
+  {
+    "date": "2026-08-04",
+    "education": "BJCP Mead Scoresheets",
+    "style": { "text": "16C: Tropical Stout" },
+    "challenge": { "text": "Mead — BJCP M1–M4" }
+  }
+]

@@ -1,0 +1,64 @@
+---
+layout: layouts/base.njk
+navKey: meetings
+title: Meetings & Events
+description: "Monthly meeting schedule for the Peninsula Fermentation Society — first Tuesday of each month, 6:30–8:30 PM."
+permalink: /meetings/
+---
+<section class="page-header">
+  <div class="page-header__inner container">
+    <div class="eyebrow">Meetings &amp; Events</div>
+    <h1 class="h1">{{ schedule.year }} Schedule</h1>
+    <p class="page-header__lede page-header__lede--meta">First Tuesday of each month · {{ site.meeting.time }} · <a href="{{ site.meeting.venueUrl }}" target="_blank" rel="noopener">{{ site.meeting.venueName }}</a> {{ site.meeting.venueNote }}</p>
+    <p class="page-header__subscribe"><a href="/calendar.ics">Subscribe to the club calendar (.ics) ↓</a> — add every meeting to your own calendar.</p>
+  </div>
+</section>
+
+<section class="schedule">
+  <div class="schedule__inner container">
+    {% for mtg in schedule.items %}
+    <div class="sched-row sched-row--{{ mtg.status }}">
+      <div class="sched-row__when">
+        <span class="sched-row__date">{{ mtg.shortDate }}</span>
+        <span class="tag tag--{{ mtg.status }}">{{ mtg.tag }}</span>
+      </div>
+      <div class="sched-row__program">
+        <div class="sched-row__cell">
+          <span class="sched-row__label">Education</span>
+          <span class="sched-row__value">{{ mtg.education }}</span>
+        </div>
+        <div class="sched-row__cell">
+          <span class="sched-row__label">Style Discussion</span>
+          <span class="sched-row__value">{{ mtg.style.text }}</span>
+        </div>
+        <div class="sched-row__cell">
+          <span class="sched-row__label">Ferment-to-Style</span>
+          <span class="sched-row__value">{{ mtg.challenge.text }}</span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="minutes" id="minutes">
+  <div class="minutes__inner container">
+    <h2 class="h2">Agendas &amp; Minutes</h2>
+    <p class="minutes__intro">Meeting records live in the member library. Each month's minutes get an auto-generated synopsis so you can catch up at a glance.</p>
+    <div class="minutes__table">
+      {% for doc in minutes %}
+      <div class="minutes__row">
+        <span class="chip chip--pdf">PDF</span>
+        <div class="minutes__body">
+          <div class="minutes__head">
+            <span class="minutes__month">{{ doc.month }}</span>
+            <span class="minutes__title">{{ doc.title }}</span>
+          </div>
+          <p class="minutes__synopsis">{{ doc.synopsis }}</p>
+        </div>
+        <a class="minutes__download" href="{{ doc.url }}" data-analytics="minutes_download" data-file-name="{{ doc.month | slugSafe }}-minutes.pdf" data-month="{{ doc.month }}">Download ↓</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

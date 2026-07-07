@@ -1,0 +1,50 @@
+---
+layout: layouts/base.njk
+navKey: about
+title: About
+description: "Founded in 2023, the Peninsula Fermentation Society shares the craft and science of fermenting — beer, cider, mead, and beyond."
+permalink: /about/
+---
+<section class="page-header">
+  <div class="page-header__inner container">
+    <div class="eyebrow">About</div>
+    <h1 class="h1">The Society</h1>
+    <p class="page-header__lede">Founded in 2023, the Peninsula Fermentation Society exists to share knowledge of the craft and science of fermenting, build our skills as brewers and fermenters, and foster camaraderie around fermented beverages of every kind — beer, cider, mead, and beyond.</p>
+  </div>
+</section>
+
+<section class="committee" id="committee">
+  <div class="committee__inner container">
+    <h2 class="h2">Executive Committee</h2>
+    <div class="committee__grid">
+      {% for member in committee %}
+      <div class="card committee__card">
+        {% if member.photo %}
+        <img class="committee__photo" src="{{ member.photo }}" alt="{{ member.name }}">
+        {% else %}
+        <div class="committee__photo committee__photo--empty">Photo</div>
+        {% endif %}
+        <div class="committee__who">
+          <span class="committee__role">{{ member.role }}</span>
+          <span class="committee__name">{{ member.name }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="governance">
+  <div class="governance__inner container">
+    <a class="governance__card" href="/by-laws/">
+      <span class="eyebrow eyebrow--on-dark">Governance</span>
+      <span class="governance__title">By-Laws</span>
+      <span class="governance__blurb">How the society is organized and run.</span>
+    </a>
+    <a class="governance__card" href="/code-of-conduct/">
+      <span class="eyebrow eyebrow--on-dark">Governance</span>
+      <span class="governance__title">Code of Conduct</span>
+      <span class="governance__blurb">What we expect of every member, every meeting.</span>
+    </a>
+  </div>
+</section>

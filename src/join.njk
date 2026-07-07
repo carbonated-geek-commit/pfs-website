@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+navKey: join
+title: Join / Contact
+description: "Join the Peninsula Fermentation Society — come to a meeting, first Tuesday of every month at 6:30 PM, or send us a note."
+permalink: /join/
+---
+<section class="join">
+  <div class="join__inner container">
+    <div class="join__copy">
+      <div class="eyebrow eyebrow--on-dark">Join the Society</div>
+      <h1 class="join__title">Come ferment with us.</h1>
+      <p class="join__lede">Curious about brewing, cider, mead, or anything fermented? Come to a meeting — first Tuesday of every month, 6:30 PM. Or just send us a note.</p>
+      <div class="join__cta">
+        <a class="btn btn--amber btn--lg" href="mailto:{{ site.email }}" data-analytics="contact_email_click">{{ site.email }}</a>
+      </div>
+      <div class="join__social">
+        <a href="{{ site.social.facebook }}" target="_blank" rel="noopener" data-analytics="outbound_click">Facebook</a>
+        <a href="{{ site.social.instagram }}" target="_blank" rel="noopener" data-analytics="outbound_click">Instagram</a>
+      </div>
+    </div>
+    <div class="join__art">
+      <img src="/assets/img/seal-800.png" alt="">
+    </div>
+  </div>
+</section>

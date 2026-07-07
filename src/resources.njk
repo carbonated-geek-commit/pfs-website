@@ -1,0 +1,48 @@
+---
+layout: layouts/base.njk
+navKey: resources
+title: Resources
+description: "The member library — recipes, forms, training aids, and past presentations, organized in one place."
+permalink: /resources/
+---
+<section class="page-header">
+  <div class="page-header__inner container">
+    <div class="eyebrow">Member Resources</div>
+    <h1 class="h1">The Library</h1>
+    <p class="page-header__lede">Recipes, forms, training aids, and past presentations — organized in one place instead of scattered Drive folders.</p>
+  </div>
+</section>
+
+<div class="members-banner">
+  <div class="members-banner__inner container">
+    <span class="members-banner__chip">Members Only</span>
+    <span class="members-banner__text">Downloads require a member sign-in — file links are no longer public, and folder metadata stays private.</span>
+    <a class="btn btn--cream members-banner__signin" href="{{ site.memberSignInUrl or 'mailto:' + site.email + '?subject=Member sign-in access' }}" data-analytics="member_signin_click">Member Sign-In</a>
+  </div>
+</div>
+
+<section class="library">
+  <div class="library__inner container">
+    {% for col in library %}
+    <div class="collection{% if loop.first %} is-open{% endif %}" id="{{ col.title | slugSafe }}">
+      <button class="collection__header" type="button" aria-expanded="{% if loop.first %}true{% else %}false{% endif %}">
+        <span class="collection__heading">
+          <span class="collection__title">{{ col.title }}</span>
+          <span class="collection__blurb">{{ col.blurb }}</span>
+        </span>
+        <span class="collection__chevron" aria-hidden="true">▾</span>
+      </button>
+      <div class="collection__body">
+        {% for doc in col.items %}
+        <div class="collection__row">
+          <span class="chip chip--{{ doc.kind | lower }}">{{ doc.kind }}</span>
+          <span class="collection__file">{{ doc.title }}</span>
+          <a class="collection__download" href="{{ doc.url }}" aria-label="Download {{ doc.title }}" data-analytics="resource_download" data-collection="{{ col.title }}" data-file-name="{{ doc.title }}">↓</a>
+        </div>
+        {% endfor %}
+        <div class="collection__note">Sample items — synced from the club's document store.</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>

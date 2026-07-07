@@ -1,0 +1,33 @@
+<header class="site-header">
+  <div class="site-header__inner container">
+    <a class="lockup" href="/">
+      <img class="lockup__seal" src="/assets/img/seal-192.png" alt="Peninsula Fermentation Society seal">
+      <span class="lockup__text">
+        <span class="lockup__name">Peninsula Fermentation</span>
+        <span class="lockup__sub">Society · Est. {{ site.established }}</span>
+      </span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a class="site-nav__link{% if navKey == 'home' %} is-active{% endif %}" href="/" {% if navKey == 'home' %}aria-current="page"{% endif %}>Home</a>
+      <a class="site-nav__link{% if navKey == 'about' %} is-active{% endif %}" href="/about/" {% if navKey == 'about' %}aria-current="page"{% endif %}>About</a>
+      <a class="site-nav__link{% if navKey == 'meetings' %} is-active{% endif %}" href="/meetings/" {% if navKey == 'meetings' %}aria-current="page"{% endif %}>Meetings &amp; Events</a>
+      <a class="site-nav__link{% if navKey == 'competitions' %} is-active{% endif %}" href="/competitions/" {% if navKey == 'competitions' %}aria-current="page"{% endif %}>Competitions</a>
+      <a class="site-nav__link{% if navKey == 'resources' %} is-active{% endif %}" href="/resources/" {% if navKey == 'resources' %}aria-current="page"{% endif %}>Resources</a>
+    </nav>
+    <a class="btn btn--amber site-header__join" href="/join/" data-analytics="nav_join_click">Join Us</a>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="burger__bar"></span>
+      <span class="burger__bar"></span>
+      <span class="burger__bar"></span>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
+    <a class="mobile-menu__link" href="/">Home</a>
+    <a class="mobile-menu__link" href="/about/">About the Society</a>
+    <a class="mobile-menu__link" href="/meetings/">Meetings &amp; Events</a>
+    <a class="mobile-menu__link" href="/competitions/">Competitions</a>
+    <a class="mobile-menu__link" href="/resources/">Member Resources</a>
+    <a class="mobile-menu__link" href="/join/">Join / Contact</a>
+    <a class="btn btn--amber mobile-menu__join" href="/join/" data-analytics="nav_join_click">Join Us</a>
+  </nav>
+</header>

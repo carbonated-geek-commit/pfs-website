@@ -1,0 +1,45 @@
+<footer class="site-footer">
+  <div class="site-footer__grid container">
+    <div class="site-footer__brand">
+      <img src="/assets/img/seal-192.png" alt="" width="88" height="88">
+      <p>Sharing the craft and science of fermentation on the Peninsula since {{ site.established }}.</p>
+    </div>
+    <div class="site-footer__col">
+      <span class="site-footer__heading">About</span>
+      <a href="/about/">Mission</a>
+      <a href="/about/#committee">Executive Committee</a>
+      <a href="/by-laws/">By-Laws</a>
+      <a href="/code-of-conduct/">Code of Conduct</a>
+    </div>
+    <div class="site-footer__col">
+      <span class="site-footer__heading">Meetings</span>
+      <a href="/meetings/">{{ schedule.year }} Schedule</a>
+      <a href="/meetings/#minutes">Agendas &amp; Minutes</a>
+      <a href="/join/">Visit a Meeting</a>
+    </div>
+    <div class="site-footer__col">
+      <span class="site-footer__heading">Competitions</span>
+      <a href="/competitions/">All-American HBC</a>
+      <a href="/competitions/#results-2025">2025 Results</a>
+      <span class="site-footer__heading site-footer__heading--stacked">Resources</span>
+      <a href="/resources/#forms-training-aids">Forms &amp; Training Aids</a>
+      <a href="/resources/#member-recipes">Member Recipes</a>
+      <a href="/resources/#presentations">Presentations</a>
+    </div>
+    <div class="site-footer__col">
+      <span class="site-footer__heading">Community</span>
+      {% for link in site.community %}
+      <a href="{{ link.url }}" target="_blank" rel="noopener" data-analytics="outbound_click">{{ link.label }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="site-footer__bar">
+    <div class="site-footer__bar-inner container">
+      <span>© {{ site.copyrightYear }} {{ site.name }}</span>
+      <span class="site-footer__spacer"></span>
+      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+      <a href="{{ site.social.facebook }}" target="_blank" rel="noopener" data-analytics="outbound_click">Facebook</a>
+      <a href="{{ site.social.instagram }}" target="_blank" rel="noopener" data-analytics="outbound_click">Instagram</a>
+    </div>
+  </div>
+</footer>

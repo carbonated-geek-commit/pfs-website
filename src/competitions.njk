@@ -1,0 +1,32 @@
+---
+layout: layouts/base.njk
+navKey: competitions
+title: Competitions
+description: "The All-American Homebrew Competition — BJCP-sanctioned, hosted by the Peninsula Fermentation Society, open to brewers everywhere."
+permalink: /competitions/
+---
+<section class="page-header">
+  <div class="page-header__inner container">
+    <div class="eyebrow">Competitions</div>
+    <h1 class="h1">Put your brew to the test</h1>
+  </div>
+</section>
+
+<section class="comp">
+  <div class="comp__inner container">
+    <div class="comp__flagship">
+      <span class="eyebrow eyebrow--on-dark">Our flagship event</span>
+      <h2 class="comp__title">All-American Homebrew Competition</h2>
+      <p class="comp__blurb">Hosted by the Peninsula Fermentation Society and judged to BJCP standards. Open to brewers everywhere — entries, rules, and registration are handled online.</p>
+      <div class="comp__cta">
+        <a class="btn btn--amber" href="{{ site.competition.entryUrl }}" target="_blank" rel="noopener" data-analytics="competition_enter_click">Enter the Competition</a>
+      </div>
+    </div>
+    <a class="card card--link comp__results" id="results-2025" href="{{ site.competition.results2025Url }}" target="_blank" rel="noopener">
+      <span class="eyebrow">Results</span>
+      <span class="comp__results-title">2025 All-American HBC</span>
+      <span class="comp__results-blurb">Winners, scores, and Best of Show from last year's competition.</span>
+      <span class="teaser__cta">View results →</span>
+    </a>
+  </div>
+</section>

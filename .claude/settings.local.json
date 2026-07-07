@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.peninsulafermentation.org)",
+      "WebFetch(domain:pfsamericanhbc.brewingcompetitions.com)",
+      "WebFetch(domain:brewingcompetitions.com)",
+      "PowerShell(npm install --no-fund --no-audit 2>&1)",
+      "PowerShell(npx eleventy 2>&1)",
+      "PowerShell(gh auth status 2>&1)"
+    ]
+  }
+}

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #F7F1E3; color: #34352A; font-family: 'Source Sans 3', sans-serif; }
+    a { color: #9A6D24; text-decoration-color: #D9BD86; }
+    a:hover { color: #7C561B; }
+    ::selection { background: #E4C98F; }
+  </style>
+</helmet>
+
+<div style="max-width: 430px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; background: #F7F1E3; box-shadow: 0 0 40px rgba(35,36,26,0.12)">
+
+  <!-- Sticky header -->
+  <header data-screen-label="Mobile header" style="position: sticky; top: 0; z-index: 50; background: #3C4A2E">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; min-height: 44px">
+      <img src="assets/pfs-seal.png" alt="Peninsula Fermentation Society seal" style="width: 40px; height: 40px; object-fit: contain">
+      <div style="display: flex; flex-direction: column; line-height: 1.05; flex: 1">
+        <span style="font-family: Oswald, sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.04em; color: #F3ECD9; text-transform: uppercase">Peninsula Fermentation</span>
+        <span style="font-family: Oswald, sans-serif; font-weight: 400; font-size: 9px; letter-spacing: 0.4em; color: #C9A15C; text-transform: uppercase">Society · Est. 2023</span>
+      </div>
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="width: 44px; height: 44px; background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px">
+        <span style="{{ burgerTop }}"></span>
+        <span style="{{ burgerMid }}"></span>
+        <span style="{{ burgerBot }}"></span>
+      </button>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <nav style="display: flex; flex-direction: column; background: #333F27; border-top: 1px solid rgba(243,236,217,0.15); padding: 8px 0 12px">
+        <sc-for list="{{ menuItems }}" as="item" hint-placeholder-count="6">
+          <button onClick="{{ item.onClick }}" style="text-align: left; background: transparent; border: none; cursor: pointer; padding: 13px 20px; font-family: Oswald, sans-serif; font-weight: 500; font-size: 15px; letter-spacing: 0.12em; text-transform: uppercase; color: #E8E2CC; min-height: 44px" style-hover="color: #E4C98F">{{ item.label }}</button>
+        </sc-for>
+        <a href="mailto:info@peninsulafermentation.org" data-analytics="nav_join_click" style="margin: 8px 20px 4px; text-align: center; font-family: Oswald, sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; background: #C08A34; color: #23241A; text-decoration: none; border-radius: 3px; padding: 13px 20px" style-hover="background: #D49C44">Join Us</a>
+      </nav>
+    </sc-if>
+  </header>
+
+  <!-- Venue notice -->
+  <sc-if value="{{ showVenue }}" hint-placeholder-val="{{ true }}">
+    <div style="background: #C08A34; color: #23241A; padding: 9px 16px; font-size: 13.5px; font-weight: 600; line-height: 1.4; text-align: center">
+      From Oct 6, 2026 meetings move to <a href="https://rainydazebrewing.com/" target="_blank" style="color: #23241A; text-decoration-color: #23241A">Rainy Daze Brewing</a>.
+    </div>
+  </sc-if>
+
+  <!-- Hero -->
+  <section data-screen-label="Mobile hero" style="background: #F7F1E3; padding: 36px 20px 32px; display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center">
+    <img src="assets/pfs-seal.png" alt="Peninsula Fermentation Society" style="width: 220px; height: 220px; object-fit: contain; filter: drop-shadow(0 8px 18px rgba(35,36,26,0.18))">
+    <h1 style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 34px; line-height: 1.08; letter-spacing: 0.01em; text-transform: uppercase; color: #23241A; margin: 0; text-wrap: balance">The craft &amp; science of fermentation, shared.</h1>
+    <p style="font-size: 16px; line-height: 1.55; margin: 0; color: #4A4B3C">We build our skills as brewers and fermenters — and enjoy the results together.</p>
+    <div style="width: 100%; box-sizing: border-box; background: #EFE6D0; border: 1px solid #E3D8BC; border-radius: 6px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; text-align: left">
+      <div style="display: flex; flex-direction: column; gap: 2px; flex: 1">
+        <span style="font-size: 14.5px; font-weight: 700; color: #23241A">First Tuesday, monthly · 6:30 – 8:30 PM</span>
+        <span style="font-size: 13.5px; color: #6A6B55; font-weight: 600"><a href="http://www.momentbrewing.com/" target="_blank">Moment Brewing</a> · 10876 Myhre Pl NW, Silverdale</span>
+      </div>
+      <a href="https://www.google.com/maps/search/?api=1&query=Moment+Brewing+10876+Myhre+Pl+NW+Suite+112+Silverdale+WA+98383" target="_blank" data-analytics="directions_click" style="flex-shrink: 0; font-family: Oswald, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; background: #C08A34; color: #23241A; text-decoration: none; border-radius: 3px; padding: 12px 14px; white-space: nowrap" style-hover="background: #D49C44">Map →</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 4px">
+      <a href="mailto:info@peninsulafermentation.org" data-analytics="hero_join_click" style="font-family: Oswald, sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; background: #23241A; color: #F3ECD9; text-decoration: none; border-radius: 3px; padding: 15px 20px; text-align: center" style-hover="background: #3A3B2C; color: #F3ECD9">Become a Member</a>
+      <button onClick="{{ goSchedule }}" data-analytics="hero_calendar_click" style="font-family: Oswald, sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; background: transparent; color: #23241A; border: 2px solid #23241A; border-radius: 3px; padding: 13px 20px; cursor: pointer" style-hover="background: #EDE4CE">See the Calendar</button>
+    </div>
+  </section>
+
+  <!-- Next meeting -->
+  <section id="m-next" data-screen-label="Mobile next meeting" style="background: #333F27; color: #F3ECD9; padding: 32px 20px; display: flex; flex-direction: column; gap: 14px">
+    <div style="font-family: Oswald, sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #C9A15C">Next Meeting</div>
+    <div style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 30px; line-height: 1.1; text-transform: uppercase">Tuesday, July 7</div>
+    <div style="background: #3F4D2F; border-radius: 6px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; margin-top: -2px">
+      <div style="display: flex; flex-direction: column; gap: 2px; flex: 1">
+        <span style="font-size: 14.5px; font-weight: 700; color: #F3ECD9">6:30 – 8:30 PM</span>
+        <span style="font-size: 13.5px; color: #C9C4AC">Moment Brewing · 10876 Myhre Pl NW, Silverdale</span>
+      </div>
+      <a href="https://www.google.com/maps/search/?api=1&query=Moment+Brewing+10876+Myhre+Pl+NW+Suite+112+Silverdale+WA+98383" target="_blank" data-analytics="directions_click" style="flex-shrink: 0; font-family: Oswald, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; background: #C08A34; color: #23241A; text-decoration: none; border-radius: 3px; padding: 12px 14px; white-space: nowrap" style-hover="background: #D49C44">Map →</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 1px; background: rgba(243,236,217,0.14); border-radius: 6px; overflow: hidden">
+      <div style="padding: 14px 16px; background: #3F4D2F; display: flex; flex-direction: column; gap: 3px">
+        <span style="font-family: Oswald, sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #C9A15C">Education</span>
+        <span style="font-size: 15px">Hops — varieties, usage &amp; timing</span>
+      </div>
+      <div style="padding: 14px 16px; background: #3F4D2F; display: flex; flex-direction: column; gap: 3px">
+        <span style="font-family: Oswald, sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #C9A15C">Style Discussion</span>
+        <span style="font-size: 15px"><a href="https://www.bjcp.org/style/2021/27/27A/historical-beer-kentucky-common/" target="_blank" style="color: #E4C98F">Kentucky Common</a> — historical beer</span>
+      </div>
+      <div style="padding: 14px 16px; background: #3F4D2F; display: flex; flex-direction: column; gap: 3px">
+        <span style="font-family: Oswald, sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #C9A15C">Brew Challenge</span>
+        <span style="font-size: 15px">BOS Same-Recipe — <a href="https://www.bjcp.org/style/2021/1/1C/cream-ale/" target="_blank" style="color: #E4C98F">1C: Cream Ale</a></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule -->
+  <section id="m-schedule" data-screen-label="Mobile schedule" style="background: #F7F1E3; padding: 36px 20px; display: flex; flex-direction: column; gap: 16px">
+    <h2 style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase; color: #23241A; margin: 0">2026 Schedule</h2>
+    <sc-for list="{{ schedule }}" as="mtg" hint-placeholder-count="3">
+      <div style="{{ mtg.cardStyle }}">
+        <div style="display: flex; align-items: center; gap: 10px">
+          <span style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase">{{ mtg.date }}</span>
+          <span style="{{ mtg.tagStyle }}">{{ mtg.tag }}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; font-size: 14.5px; line-height: 1.45">
+          <span><strong>Education:</strong> {{ mtg.education }}</span>
+          <span><strong>Style:</strong> {{ mtg.styleTopic }}</span>
+          <span><strong>Challenge:</strong> {{ mtg.challenge }}</span>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+
+  <!-- Meeting format -->
+  <section id="m-about" data-screen-label="Mobile about" style="background: #EFE6D0; padding: 36px 20px; display: flex; flex-direction: column; gap: 16px">
+    <div style="font-family: Oswald, sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #9A6D24">Every meeting</div>
+    <h2 style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase; color: #23241A; margin: 0">Learn. Taste. Brew.</h2>
+    <div style="display: flex; flex-direction: column; gap: 12px">
+      <div style="background: #FFFDF6; border: 1px solid #E3D8BC; border-radius: 6px; padding: 16px; display: flex; gap: 14px; align-items: flex-start">
+        <div style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #55703B; color: #F3ECD9; font-family: Oswald, sans-serif; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center">1</div>
+        <div style="display: flex; flex-direction: column; gap: 3px">
+          <span style="font-family: Oswald, sans-serif; font-weight: 600; font-size: 16px; text-transform: uppercase; color: #23241A">Educational Topic</span>
+          <span style="font-size: 14.5px; line-height: 1.5; color: #55564A">Member-led deep dives — ingredients to BJCP scoresheets.</span>
+        </div>
+      </div>
+      <div style="background: #FFFDF6; border: 1px solid #E3D8BC; border-radius: 6px; padding: 16px; display: flex; gap: 14px; align-items: flex-start">
+        <div style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #4E6B7A; color: #F3ECD9; font-family: Oswald, sans-serif; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center">2</div>
+        <div style="display: flex; flex-direction: column; gap: 3px">
+          <span style="font-family: Oswald, sans-serif; font-weight: 600; font-size: 16px; text-transform: uppercase; color: #23241A">Style Discussion</span>
+          <span style="font-size: 14.5px; line-height: 1.5; color: #55564A">One BJCP style a month, tasted together.</span>
+        </div>
+      </div>
+      <div style="background: #FFFDF6; border: 1px solid #E3D8BC; border-radius: 6px; padding: 16px; display: flex; gap: 14px; align-items: flex-start">
+        <div style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #A93B2E; color: #F3ECD9; font-family: Oswald, sans-serif; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center">3</div>
+        <div style="display: flex; flex-direction: column; gap: 3px">
+          <span style="font-family: Oswald, sans-serif; font-weight: 600; font-size: 16px; text-transform: uppercase; color: #23241A">Ferment-to-Style</span>
+          <span style="font-size: 14.5px; line-height: 1.5; color: #55564A">Brew the challenge style and get structured feedback.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources (accordion) -->
+  <section id="m-resources" data-screen-label="Mobile resources" style="background: #F7F1E3; padding: 36px 20px; display: flex; flex-direction: column; gap: 14px">
+    <h2 style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase; color: #23241A; margin: 0">The Library</h2>
+    <sc-if value="{{ gated }}" hint-placeholder-val="{{ true }}">
+      <div style="background: #4E6B7A; color: #F3ECD9; border-radius: 6px; padding: 12px 14px; display: flex; align-items: center; gap: 10px">
+        <span style="font-family: Oswald, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(243,236,217,0.16); border-radius: 3px; padding: 4px 8px; flex-shrink: 0; white-space: nowrap">Members Only</span>
+        <span style="font-size: 13.5px; line-height: 1.4">Downloads require member sign-in.</span>
+      </div>
+    </sc-if>
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <sc-for list="{{ collections }}" as="col" hint-placeholder-count="3">
+        <div style="background: #FFFDF6; border: 1px solid #E3D8BC; border-radius: 6px; overflow: hidden">
+          <button onClick="{{ col.toggle }}" style="width: 100%; display: flex; align-items: center; gap: 10px; background: #333F27; border: none; cursor: pointer; padding: 15px 16px; text-align: left; min-height: 48px">
+            <span style="font-family: Oswald, sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.05em; text-transform: uppercase; color: #F3ECD9; flex: 1">{{ col.title }}</span>
+            <span style="{{ col.chevronStyle }}">▾</span>
+          </button>
+          <sc-if value="{{ col.open }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-direction: column">
+              <sc-for list="{{ col.items }}" as="doc" hint-placeholder-count="4">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid #EFE7D2">
+                  <span style="{{ doc.chipStyle }}">{{ doc.kind }}</span>
+                  <span style="font-size: 14px; font-weight: 600; color: #23241A; flex: 1; line-height: 1.3">{{ doc.title }}</span>
+                  <a href="#" data-analytics="resource_download" style="color: #9A6D24; text-decoration: none; padding: 8px" style-hover="color: #7C561B">↓</a>
+                </div>
+              </sc-for>
+              <div style="padding: 10px 16px; font-size: 12px; color: #8A8B72; font-style: italic">Sample items — synced from the club's document store.</div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Competitions -->
+  <section id="m-competitions" data-screen-label="Mobile competitions" style="background: #333F27; color: #F3ECD9; padding: 36px 20px; display: flex; flex-direction: column; gap: 12px">
+    <div style="font-family: Oswald, sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #C9A15C">Competitions</div>
+    <h2 style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase; margin: 0">All-American Homebrew Competition</h2>
+    <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #C9C4AC">BJCP-judged and open to brewers everywhere. Entries and registration are online.</p>
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 6px">
+      <a href="https://pfsamericanhbc.brewingcompetitions.com/" target="_blank" data-analytics="competition_enter_click" style="font-family: Oswald, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; background: #C08A34; color: #23241A; text-decoration: none; border-radius: 3px; padding: 14px 20px; text-align: center" style-hover="background: #D49C44">Enter the Competition</a>
+      <a href="https://www.peninsulafermentation.org/competitions/results-2025-all-american-homebrew-competition" target="_blank" style="font-family: Oswald, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; background: transparent; color: #E4C98F; border: 1.5px solid #C9A15C; text-decoration: none; border-radius: 3px; padding: 12px 20px; text-align: center" style-hover="background: rgba(201,161,92,0.14)">2025 Results</a>
+    </div>
+  </section>
+
+  <!-- Join -->
+  <section id="m-join" data-screen-label="Mobile join" style="background: #EFE6D0; padding: 40px 20px; display: flex; flex-direction: column; gap: 14px; text-align: center; align-items: center">
+    <div style="font-family: Oswald, sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #9A6D24">Join the Society</div>
+    <h2 style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 28px; line-height: 1.1; text-transform: uppercase; color: #23241A; margin: 0">Come ferment with us.</h2>
+    <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4B3C">Come to a meeting — first Tuesday, 6:30 PM — or send us a note.</p>
+    <a href="mailto:info@peninsulafermentation.org" data-analytics="contact_email_click" style="width: 100%; box-sizing: border-box; font-family: Oswald, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; background: #C08A34; color: #23241A; text-decoration: none; border-radius: 3px; padding: 15px 16px; text-align: center" style-hover="background: #D49C44">info@peninsulafermentation.org</a>
+    <div style="display: flex; gap: 24px; justify-content: center">
+      <a href="https://www.facebook.com/peninsulafermentationsociety/" target="_blank" data-analytics="outbound_click" style="font-size: 15px; padding: 8px 0">Facebook</a>
+      <a href="https://www.instagram.com/peninsulafermentationsociety/" target="_blank" data-analytics="outbound_click" style="font-size: 15px; padding: 8px 0">Instagram</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer data-screen-label="Mobile footer" style="background: #2C3721; color: #C9C4AC; padding: 32px 20px 24px; display: flex; flex-direction: column; gap: 24px">
+    <div style="display: flex; align-items: center; gap: 14px">
+      <img src="assets/pfs-seal.png" alt="" style="width: 64px; height: 64px; object-fit: contain">
+      <p style="margin: 0; font-size: 13.5px; line-height: 1.5">Sharing the craft and science of fermentation on the Peninsula since 2023.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 9px">
+        <span style="font-family: Oswald, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #C9A15C">Society</span>
+        <a href="https://www.peninsulafermentation.org/by-laws" target="_blank" style="color: #C9C4AC; font-size: 14px; text-decoration: none" style-hover="color: #F3ECD9">By-Laws</a>
+        <a href="https://www.peninsulafermentation.org/code-of-conduct" target="_blank" style="color: #C9C4AC; font-size: 14px; text-decoration: none" style-hover="color: #F3ECD9">Code of Conduct</a>
+        <a href="https://www.peninsulafermentation.org/competitions/results-2025-all-american-homebrew-competition" target="_blank" style="color: #C9C4AC; font-size: 14px; text-decoration: none" style-hover="color: #F3ECD9">2025 Results</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px">
+        <span style="font-family: Oswald, sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #C9A15C">Community</span>
+        <a href="https://www.homebrewersassociation.org/" target="_blank" data-analytics="outbound_click" style="color: #C9C4AC; font-size: 14px; text-decoration: none" style-hover="color: #F3ECD9">AHA</a>
+        <a href="https://www.wahomebrewers.org" target="_blank" data-analytics="outbound_click" style="color: #C9C4AC; font-size: 14px; text-decoration: none" style-hover="color: #F3ECD9">WA Homebrew Assoc.</a>
+        <a href="https://www.bjcp.org/" target="_blank" data-analytics="outbound_click" style="color: #C9C4AC; font-size: 14px; text-decoration: none" style-hover="color: #F3ECD9">BJCP</a>
+      </div>
+    </div>
+    <div style="border-top: 1px solid rgba(201,196,172,0.18); padding-top: 14px; font-size: 12px; color: #8A8B72">© 2026 Peninsula Fermentation Society</div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 390, &quot;height&quot;: 844 },
+  &quot;showVenueNotice&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Content&quot; },
+  &quot;gatedResources&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Content&quot; }
+}">
+class Component extends DCLogic {
+  state = { menuOpen: false, openCollection: 'Forms & Training Aids' };
+
+  jump(id) {
+    this.setState({ menuOpen: false });
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.scrollY - 62;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }, 60);
+  }
+
+  renderVals() {
+    const { menuOpen, openCollection } = this.state;
+
+    const bar = {
+      display: 'block', width: '22px', height: '2px', background: '#F3ECD9',
+      borderRadius: '1px', transition: 'transform 0.2s, opacity 0.2s',
+    };
+
+    const menuItems = [
+      ['Next Meeting', 'm-next'],
+      ['2026 Schedule', 'm-schedule'],
+      ['About the Society', 'm-about'],
+      ['Member Resources', 'm-resources'],
+      ['Competitions', 'm-competitions'],
+      ['Join / Contact', 'm-join'],
+    ].map(([label, id]) => ({ label, onClick: () => this.jump(id) }));
+
+    const tagBase = {
+      fontFamily: 'Oswald, sans-serif', fontWeight: 600, fontSize: '10px',
+      letterSpacing: '0.14em', textTransform: 'uppercase',
+      borderRadius: '3px', padding: '3px 7px',
+    };
+    const cardBase = {
+      borderRadius: '6px', padding: '16px',
+      display: 'flex', flexDirection: 'column', gap: '10px',
+    };
+    const schedule = [
+      {
+        date: 'Jun 2', tag: 'Past',
+        education: 'BJCP Cider Scoresheets',
+        styleTopic: '1D: American Wheat',
+        challenge: 'Cider — BJCP C1–C4',
+        cardStyle: { ...cardBase, background: '#EFE7D2', color: '#7A7B64', opacity: 0.85 },
+        tagStyle: { ...tagBase, background: '#DED3B8', color: '#7A7B64' },
+      },
+      {
+        date: 'Jul 7', tag: 'Next meeting',
+        education: 'Hops — varieties, usage & timing',
+        styleTopic: 'Kentucky Common (historical)',
+        challenge: 'BOS Same-Recipe — 1C: Cream Ale',
+        cardStyle: { ...cardBase, background: '#333F27', color: '#F3ECD9' },
+        tagStyle: { ...tagBase, background: '#C08A34', color: '#23241A' },
+      },
+      {
+        date: 'Aug 4', tag: 'Upcoming',
+        education: 'BJCP Mead Scoresheets',
+        styleTopic: '16C: Tropical Stout',
+        challenge: 'Mead — BJCP M1–M4',
+        cardStyle: { ...cardBase, background: '#FFFDF6', color: '#34352A', border: '1px solid #E3D8BC' },
+        tagStyle: { ...tagBase, background: '#EFE7D2', color: '#9A6D24' },
+      },
+    ];
+
+    const chip = (kind, bg) => ({
+      kind,
+      chipStyle: {
+        fontFamily: 'monospace', fontSize: '9px', fontWeight: 700, flexShrink: 0,
+        color: '#F3ECD9', background: bg, borderRadius: '3px', padding: '3px 6px',
+      },
+    });
+    const collectionDefs = [
+      {
+        title: 'Forms & Training Aids',
+        items: [
+          { title: 'BJCP Beer Scoresheet', ...chip('PDF', '#4E6B7A') },
+          { title: 'BJCP Cider Scoresheet', ...chip('PDF', '#4E6B7A') },
+          { title: 'Competition Entry Checklist', ...chip('DOC', '#55703B') },
+          { title: 'Water Chemistry Quick Reference', ...chip('PDF', '#4E6B7A') },
+        ],
+      },
+      {
+        title: 'Member Recipes',
+        items: [
+          { title: 'Cream Ale — BOS Challenge Recipe', ...chip('PDF', '#4E6B7A') },
+          { title: 'Traditional Mead — Show Medalist', ...chip('PDF', '#4E6B7A') },
+          { title: 'Dry Cider — Fall Pressing', ...chip('DOC', '#55703B') },
+          { title: 'Kentucky Common — Historical', ...chip('PDF', '#4E6B7A') },
+        ],
+      },
+      {
+        title: 'Presentations',
+        items: [
+          { title: 'Hops: Varieties, Usage & Timing', ...chip('PPT', '#A93B2E') },
+          { title: 'Reading BJCP Cider Scoresheets', ...chip('PPT', '#A93B2E') },
+          { title: 'Yeast Health & Fermentation Temps', ...chip('PPT', '#A93B2E') },
+          { title: 'Kegging vs. Bottling', ...chip('PPT', '#A93B2E') },
+        ],
+      },
+    ];
+    const collections = collectionDefs.map((c) => {
+      const open = openCollection === c.title;
+      return {
+        ...c,
+        open,
+        toggle: () => this.setState({ openCollection: open ? null : c.title }),
+        chevronStyle: {
+          color: '#C9A15C', fontSize: '14px', transition: 'transform 0.2s',
+          transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+        },
+      };
+    });
+
+    return {
+      menuOpen,
+      toggleMenu: () => this.setState({ menuOpen: !menuOpen }),
+      burgerTop: { ...bar, transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' },
+      burgerMid: { ...bar, opacity: menuOpen ? 0 : 1 },
+      burgerBot: { ...bar, transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' },
+      menuItems,
+      schedule,
+      collections,
+      goSchedule: () => this.jump('m-schedule'),
+      showVenue: this.props.showVenueNotice ?? true,
+      gated: this.props.gatedResources ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>

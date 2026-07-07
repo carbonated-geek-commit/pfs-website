@@ -1,0 +1,122 @@
+---
+layout: layouts/base.njk
+navKey: home
+description: "A homebrew & fermentation club in Silverdale, WA. Monthly meetings, BJCP style discussions, brew challenges, and the All-American Homebrew Competition."
+permalink: /
+---
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero__inner container">
+    <div class="hero__copy">
+      <div class="eyebrow">A homebrew &amp; fermentation club</div>
+      <h1 class="hero__title">The craft &amp; science of fermentation, shared.</h1>
+      <p class="hero__lede">We share knowledge of the craft and science of fermenting, build our skills as brewers and fermenters, and foster camaraderie around a shared enthusiasm for making — and enjoying — fermented beverages.</p>
+      <div class="hero__meta">
+        <span>{{ site.meeting.cadence }}</span><span class="hero__diamond">◆</span><span>{{ site.meeting.time }}</span><span class="hero__diamond">◆</span><span><a href="{{ site.meeting.venueUrl }}" target="_blank" rel="noopener">{{ site.meeting.venueName }}</a></span>
+      </div>
+      <div class="hero__address">{{ site.meeting.address }} · <a href="{{ site.meeting.mapsUrl }}" target="_blank" rel="noopener" data-analytics="directions_click" data-venue="{{ site.meeting.venueName }}">Get directions →</a></div>
+      <div class="hero__ctas">
+        <a class="btn btn--dark btn--lg" href="mailto:{{ site.email }}" data-analytics="hero_join_click" data-location="hero">Become a Member</a>
+        <a class="btn btn--outline-ink btn--lg" href="/meetings/" data-analytics="hero_calendar_click">See the Calendar</a>
+      </div>
+    </div>
+    <div class="hero__art">
+      <div class="hero__halo">
+        <img src="/assets/img/seal-800.png" alt="Peninsula Fermentation Society">
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if schedule.next %}
+<!-- Next meeting band -->
+<section class="band-dark next-meeting">
+  <div class="next-meeting__inner container">
+    <div class="next-meeting__left">
+      <div class="eyebrow eyebrow--on-dark">Next Meeting</div>
+      <div class="next-meeting__date">{{ schedule.next.longDate }}</div>
+      <div class="location-card">
+        <div class="location-card__text">
+          <span class="location-card__time">{{ site.meeting.time }}</span>
+          <span class="location-card__place">{{ site.meeting.addressShort }}</span>
+        </div>
+        <a class="btn btn--amber btn--sm" href="{{ site.meeting.mapsUrl }}" target="_blank" rel="noopener" data-analytics="directions_click" data-venue="{{ site.meeting.venueName }}">Map →</a>
+      </div>
+      <a class="btn btn--outline-cream next-meeting__all" href="/meetings/">Full Schedule</a>
+    </div>
+    <div class="program">
+      <div class="program__row">
+        <span class="program__label">Education</span>
+        <span class="program__value">{{ schedule.next.education }}</span>
+      </div>
+      <div class="program__row">
+        <span class="program__label">Style Discussion</span>
+        <span class="program__value">{% if schedule.next.style.home %}{{ schedule.next.style.home.before }}<a href="{{ schedule.next.style.home.linkUrl }}" target="_blank" rel="noopener">{{ schedule.next.style.home.linkText }}</a>{{ schedule.next.style.home.after }}{% else %}{{ schedule.next.style.text }}{% endif %}</span>
+      </div>
+      <div class="program__row">
+        <span class="program__label">Brew Challenge</span>
+        <span class="program__value">{% if schedule.next.challenge.home %}{{ schedule.next.challenge.home.before }}<a href="{{ schedule.next.challenge.home.linkUrl }}" target="_blank" rel="noopener">{{ schedule.next.challenge.home.linkText }}</a>{{ schedule.next.challenge.home.after }}{% else %}{{ schedule.next.challenge.text }}{% endif %}</span>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Meeting format -->
+<section class="format">
+  <div class="format__inner container">
+    <div class="format__heading">
+      <div class="eyebrow">Every meeting</div>
+      <h2 class="h2">Learn. Taste. Brew.</h2>
+    </div>
+    <div class="format__grid">
+      <div class="card format__card">
+        <div class="badge badge--green">1</div>
+        <h3 class="h3">Educational Topic</h3>
+        <p>A member-led deep dive into brewing science and technique — from ingredients to BJCP scoresheets.</p>
+      </div>
+      <div class="card format__card">
+        <div class="badge badge--slate">2</div>
+        <h3 class="h3">Style Discussion</h3>
+        <p>We study one BJCP style per month and taste commercial examples together to calibrate our palates.</p>
+      </div>
+      <div class="card format__card">
+        <div class="badge badge--red">3</div>
+        <h3 class="h3">Ferment-to-Style</h3>
+        <p>Brew the challenge style, bring it in, and get structured feedback from your fellow members.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Photo band -->
+<section class="photo-band">
+  <div class="photo-band__inner container">
+    {% for photo in site.photos %}
+    {% if photo.src %}
+    <figure class="photo-band__photo"><img src="{{ photo.src }}" alt="{{ photo.alt }}"></figure>
+    {% else %}
+    <div class="photo-band__slot" role="img" aria-label="Photo placeholder">{{ photo.placeholder }}</div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Teasers -->
+<section class="teasers">
+  <div class="teasers__inner container">
+    <a class="card card--link teaser" href="/competitions/">
+      <div class="eyebrow">Competitions</div>
+      <h3 class="h3 teaser__title">All-American Homebrew Competition</h3>
+      <p>Our BJCP-sanctioned competition — see the 2025 results and how to enter.</p>
+      <span class="teaser__cta">Explore →</span>
+    </a>
+    <a class="card card--link teaser" href="/resources/">
+      <div class="eyebrow">Member Resources</div>
+      <h3 class="h3 teaser__title">Recipes, forms &amp; presentations</h3>
+      <p>One tidy library for member recipes, training aids, meeting minutes, and past presentations.</p>
+      <span class="teaser__cta">Browse the library →</span>
+    </a>
+  </div>
+</section>

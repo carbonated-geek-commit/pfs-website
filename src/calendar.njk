@@ -1,0 +1,41 @@
+---
+permalink: /calendar.ics
+eleventyExcludeFromCollections: true
+---
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Peninsula Fermentation Society//Club Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Peninsula Fermentation Society
+X-WR-TIMEZONE:America/Los_Angeles
+BEGIN:VTIMEZONE
+TZID:America/Los_Angeles
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+TZNAME:PDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+TZNAME:PST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+{%- for mtg in schedule.items %}
+BEGIN:VEVENT
+UID:pfs-meeting-{{ mtg.date }}@peninsulafermentation.org
+DTSTAMP:{{ mtg.icsStart }}Z
+DTSTART;TZID=America/Los_Angeles:{{ mtg.icsStart }}
+DTEND;TZID=America/Los_Angeles:{{ mtg.icsEnd }}
+SUMMARY:{{ ("PFS Monthly Meeting — " + mtg.education) | icsText | safe }}
+DESCRIPTION:{{ ("Education: " + mtg.education) | icsText | safe }}\n{{ ("Style Discussion: " + mtg.style.text) | icsText | safe }}\n{{ ("Ferment-to-Style: " + mtg.challenge.text) | icsText | safe }}
+LOCATION:{{ (site.meeting.venueName + ", " + site.meeting.address) | icsText | safe }}
+URL:{{ site.url }}/meetings/
+END:VEVENT
+{%- endfor %}
+END:VCALENDAR
