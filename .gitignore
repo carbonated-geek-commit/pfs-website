@@ -2,3 +2,8 @@ node_modules/
 _site/
 *.zip
 .DS_Store
+
+# Local-only files
+.claude/settings.local.json
+/PFS Mobile.dc.html
+/PFS Redesign.dc.html
