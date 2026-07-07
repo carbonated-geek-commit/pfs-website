@@ -16,6 +16,13 @@ permalink: /
         <span>{{ site.meeting.cadence }}</span><span class="hero__diamond">◆</span><span>{{ site.meeting.time }}</span><span class="hero__diamond">◆</span><span><a href="{{ site.meeting.venueUrl }}" target="_blank" rel="noopener">{{ site.meeting.venueName }}</a></span>
       </div>
       <div class="hero__address">{{ site.meeting.address }} · <a href="{{ site.meeting.mapsUrl }}" target="_blank" rel="noopener" data-analytics="directions_click" data-venue="{{ site.meeting.venueName }}">Get directions →</a></div>
+      <div class="hero__loc">
+        <div class="hero__loc-text">
+          <span class="hero__loc-when">{{ site.meeting.cadence }} · {{ site.meeting.time }}</span>
+          <span class="hero__loc-where"><a href="{{ site.meeting.venueUrl }}" target="_blank" rel="noopener">{{ site.meeting.venueName }}</a> · 10876 Myhre Pl NW, Silverdale</span>
+        </div>
+        <a class="btn btn--amber btn--sm" href="{{ site.meeting.mapsUrl }}" target="_blank" rel="noopener" data-analytics="directions_click" data-venue="{{ site.meeting.venueName }}">Map →</a>
+      </div>
       <div class="hero__ctas">
         <a class="btn btn--dark btn--lg" href="mailto:{{ site.email }}" data-analytics="hero_join_click" data-location="hero">Become a Member</a>
         <a class="btn btn--outline-ink btn--lg" href="/meetings/" data-analytics="hero_calendar_click">See the Calendar</a>
