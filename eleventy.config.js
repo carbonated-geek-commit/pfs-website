@@ -7,6 +7,9 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy("src/assets");
 
+  // Don't render doc markdown inside assets (e.g. the merch photo README) as pages.
+  eleventyConfig.ignores.add("src/assets/**/*.md");
+
   // "June 2026" → "june-2026" etc., used for analytics labels
   eleventyConfig.addFilter("slugSafe", (value) =>
     String(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")

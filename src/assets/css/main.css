@@ -231,24 +231,26 @@ img { max-width: 100%; }
   font-family: var(--oswald);
   font-weight: 400;
   font-size: 11px;
+  margin-top: 0.5em;
   letter-spacing: 0.42em;
   color: var(--amber-light);
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-.site-nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.site-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
 .site-nav__link {
   font-family: var(--oswald);
   font-weight: 500;
   font-size: 13.5px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 10px 14px;
+  padding: 10px 10px;
   color: #D8D2BC;
   border-bottom: 2px solid transparent;
   transition: color 0.2s;
+  white-space: nowrap;
 }
 .site-nav__link:hover { color: var(--amber-pale); }
 .site-nav__link.is-active { color: var(--amber-pale); border-bottom-color: var(--amber); }
@@ -604,6 +606,84 @@ img { max-width: 100%; }
   color: var(--cream-on-dark);
 }
 .governance__blurb { font-size: 15px; color: var(--cream-on-dark-2); }
+
+/* Merchandise --------------------------------------------------------------------- */
+
+.merch__inner {
+  padding-top: 32px;
+  padding-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.merch__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.merch__card {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.merch__media { width: 100%; }
+.merch__photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 5px;
+  object-fit: cover;
+  display: block;
+}
+.merch__photo--empty {
+  background: var(--cream-deep);
+  border: 1px dashed #C9BC98;
+  color: var(--muted-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.merch__photo-label { font-size: 13px; font-style: italic; }
+.merch__body { display: flex; flex-direction: column; gap: 6px; }
+.merch__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+.merch__name {
+  font-family: var(--oswald);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0;
+}
+.merch__price {
+  font-family: var(--oswald);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--amber-dark);
+  white-space: nowrap;
+}
+.merch__desc { margin: 0; font-size: 15px; line-height: 1.55; color: var(--secondary); }
+.merch__order {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.merch__order-title {
+  font-family: var(--oswald);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.merch__order-text { margin: 0; font-size: 16px; line-height: 1.55; color: var(--secondary); max-width: 60ch; }
 
 /* Schedule ------------------------------------------------------------------------ */
 
@@ -1166,6 +1246,11 @@ img { max-width: 100%; }
   /* Committee */
   .committee__grid { grid-template-columns: 1fr 1fr; gap: 14px; }
   .committee__card { padding: 16px; }
+
+  /* Merch */
+  .merch__grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .merch__order { padding: 22px 20px; }
+  .merch__order .btn { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
   .governance__inner { grid-template-columns: 1fr; padding-bottom: 44px; gap: 14px; }
   .governance__card { padding: 22px 20px; }
 
@@ -1184,6 +1269,7 @@ img { max-width: 100%; }
 
 @media (max-width: 420px) {
   .committee__grid { grid-template-columns: 1fr; }
+  .merch__grid { grid-template-columns: 1fr; }
   .hero__title { font-size: 30px; }
 }
 

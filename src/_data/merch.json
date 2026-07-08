@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Work Shirt",
+    "slug": "work-shirt",
+    "price": 27,
+    "description": "Black button-up work shirt with the society seal embroidered at the pocket. Hard-wearing and brew-day ready.",
+    "photo": "",
+    "image": "/assets/img/merch/work-shirt.jpg",
+    "alt": "Black button-up work shirt with the PFS seal embroidered at the chest pocket"
+  },
+  {
+    "name": "Black T-Shirt",
+    "slug": "black-tee",
+    "price": 20,
+    "description": "Soft black tee with the society logo on the chest. An easy everyday layer for the well-fermented.",
+    "photo": "",
+    "image": "/assets/img/merch/black-tee.jpg",
+    "alt": "Black t-shirt with the PFS logo printed on the chest"
+  },
+  {
+    "name": "Pullover Hoodie",
+    "slug": "hoodie",
+    "price": 40,
+    "description": "Grey pullover hoodie with the society logo — the warm layer for cellar temps and cold-morning brew days.",
+    "photo": "",
+    "image": "/assets/img/merch/hoodie.jpg",
+    "alt": "Grey pullover hoodie with the PFS logo on the chest"
+  },
+  {
+    "name": "Cap",
+    "slug": "cap",
+    "price": 15,
+    "description": "Grey-green front panel with the society logo and a breathable off-white mesh back. Adjustable one-size fit.",
+    "photo": "",
+    "image": "/assets/img/merch/cap.jpg",
+    "alt": "Grey-green front cap with the PFS logo and an off-white mesh back"
+  }
+]

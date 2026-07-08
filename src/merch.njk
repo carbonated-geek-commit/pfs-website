@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+navKey: merch
+title: Merchandise
+description: "Society-branded shirts, hoodies, and caps — wear the seal and support the club."
+permalink: /merch/
+---
+<section class="page-header">
+  <div class="page-header__inner container">
+    <div class="eyebrow">Merchandise</div>
+    <h1 class="h1">Club Merch</h1>
+    <p class="page-header__lede">Wear the seal. Society-branded shirts, a hoodie, and a cap — a simple way to represent the club and support what we do.</p>
+  </div>
+</section>
+
+<section class="merch">
+  <div class="merch__inner container">
+    <div class="merch__grid">
+      {% for item in merch %}
+      <div class="card merch__card">
+        <div class="merch__media">
+          {% if item.photo %}
+          <img class="merch__photo" src="{{ item.photo }}" alt="{{ item.alt }}">
+          {% else %}
+          <div class="merch__photo merch__photo--empty" role="img" aria-label="{{ item.alt }}">
+            <span class="merch__photo-label">Photo coming soon</span>
+          </div>
+          {% endif %}
+        </div>
+        <div class="merch__body">
+          <div class="merch__head">
+            <h2 class="merch__name">{{ item.name }}</h2>
+            <span class="merch__price">${{ item.price }}</span>
+          </div>
+          <p class="merch__desc">{{ item.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="merch__order">
+      <span class="merch__order-title">Want something?</span>
+      <p class="merch__order-text">There's no online checkout yet — grab items at a monthly meeting, or email us to reserve your size and we'll bring it along.</p>
+      <a class="btn btn--amber" href="mailto:{{ site.email }}?subject=Merch order" data-analytics="merch_order_click">{{ site.email }}</a>
+    </div>
+  </div>
+</section>
