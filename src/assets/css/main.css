@@ -1026,12 +1026,13 @@ img { max-width: 100%; }
   .collection__download { padding: 12px 12px; }
   .minutes__download { padding: 10px 0; }
 
-  /* Header */
+  /* Header — lockup text truncates rather than running under the burger */
   .site-header__inner { height: auto; min-height: 60px; padding-top: 10px; padding-bottom: 10px; gap: 10px; }
-  .lockup { gap: 10px; }
-  .lockup__seal { width: 40px; height: 40px; }
-  .lockup__name { font-size: 14px; }
-  .lockup__sub { font-size: 9px; letter-spacing: 0.4em; }
+  .lockup { gap: 10px; flex: 1; min-width: 0; }
+  .lockup__seal { width: 40px; height: 40px; flex-shrink: 0; }
+  .lockup__text { min-width: 0; }
+  .lockup__name { font-size: 14px; overflow: hidden; text-overflow: ellipsis; }
+  .lockup__sub { font-size: 9px; letter-spacing: 0.4em; overflow: hidden; text-overflow: ellipsis; }
   .site-nav { display: none; }
   .site-header__join { display: none; }
   .burger { display: flex; margin-left: auto; }
