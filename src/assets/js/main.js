@@ -12,6 +12,60 @@
     });
   }
 
+  /* ---- Nav dropdown (About): keyboard + touch, not hover-only ------------ */
+  document.querySelectorAll(".site-nav__item").forEach(function (item) {
+    var toggle = item.querySelector(".site-nav__toggle");
+    var dropdown = item.querySelector(".site-nav__dropdown");
+    if (!toggle || !dropdown) return;
+    var sublinks = Array.prototype.slice.call(dropdown.querySelectorAll("a"));
+
+    function setOpen(open) {
+      item.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+    }
+
+    toggle.addEventListener("click", function () {
+      setOpen(!item.classList.contains("is-open"));
+    });
+
+    toggle.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        e.stopPropagation(); // the item handler would advance focus again
+        setOpen(true);
+        sublinks[0].focus();
+      }
+    });
+
+    item.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && item.classList.contains("is-open")) {
+        setOpen(false);
+        toggle.focus();
+        return;
+      }
+      var i = sublinks.indexOf(document.activeElement);
+      if (i === -1) return;
+      if (e.key === "ArrowDown" && i < sublinks.length - 1) {
+        e.preventDefault();
+        sublinks[i + 1].focus();
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (i > 0) sublinks[i - 1].focus();
+        else toggle.focus();
+      }
+    });
+
+    // close when focus or clicks leave the item
+    item.addEventListener("focusout", function () {
+      setTimeout(function () {
+        if (!item.contains(document.activeElement)) setOpen(false);
+      }, 0);
+    });
+    document.addEventListener("click", function (e) {
+      if (!item.contains(e.target)) setOpen(false);
+    });
+  });
+
   /* ---- Library accordion (mobile only; headers are inert on desktop) ---- */
   var collections = Array.prototype.slice.call(document.querySelectorAll(".collection"));
   collections.forEach(function (col) {

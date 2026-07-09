@@ -259,9 +259,20 @@ img { max-width: 100%; }
 .site-nav__link:hover { color: var(--amber-pale); }
 .site-nav__link.is-active { color: var(--amber-pale); border-bottom-color: var(--amber); }
 
-/* Hover dropdown (About → By-Laws / Code of Conduct) */
+/* Dropdown (About → By-Laws / Code of Conduct): opens on hover for mouse,
+   and via the toggle button (click / Enter / Space / arrows) for keyboard
+   and touch — never hover-only. */
 .site-nav__item { position: relative; display: flex; align-items: center; align-self: stretch; }
-.site-nav__caret { font-size: 9px; color: var(--amber-light); }
+.site-nav__toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 9px;
+  color: var(--amber-light);
+  padding: 12px 8px;
+  align-self: center;
+}
+.site-nav__toggle:hover { color: var(--amber-pale); }
 .site-nav__dropdown {
   position: absolute;
   top: 100%;
@@ -274,8 +285,10 @@ img { max-width: 100%; }
   display: none;
   flex-direction: column;
 }
+/* :hover for mouse; .is-open is the JS-managed state for keyboard and touch
+   (no :focus-within — it would fight the toggle's Escape/close behavior) */
 .site-nav__item:hover .site-nav__dropdown,
-.site-nav__item:focus-within .site-nav__dropdown { display: flex; }
+.site-nav__item.is-open .site-nav__dropdown { display: flex; }
 .site-nav__sublink {
   font-family: var(--oswald);
   font-weight: 500;
