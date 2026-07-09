@@ -46,6 +46,10 @@
 
 * { box-sizing: border-box; }
 
+/* The [hidden] UA default loses to any author display rule (e.g. display:flex
+   on a form) — enforce it so JS `el.hidden = true` always actually hides. */
+[hidden] { display: none !important; }
+
 body {
   margin: 0;
   background: var(--cream);
