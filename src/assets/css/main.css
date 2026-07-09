@@ -923,7 +923,8 @@ a.collection__row:hover { background: var(--cream); color: inherit; }
 }
 .comp__blurb { margin: 0; font-size: 17px; line-height: 1.6; color: var(--cream-on-dark-2); }
 .comp__cta { display: flex; gap: 12px; margin-top: 8px; align-items: center; }
-.comp__results { padding: 32px; }
+.comp__results { padding: 32px; display: flex; flex-direction: column; gap: 10px; }
+.results-pending { color: var(--muted); font-style: italic; }
 .comp__results-title {
   font-family: var(--oswald);
   font-weight: 600;
