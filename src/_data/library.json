@@ -1,32 +1,28 @@
 [
   {
     "title": "Forms & Training Aids",
-    "blurb": "Scoresheets, checklists, and how-tos",
+    "blurb": "Scoresheets, style guidelines, and reference material.",
     "items": [
-      { "title": "BJCP Beer Scoresheet", "kind": "PDF", "url": "#" },
-      { "title": "BJCP Cider Scoresheet", "kind": "PDF", "url": "#" },
-      { "title": "Competition Entry Checklist", "kind": "DOC", "url": "#" },
-      { "title": "Water Chemistry Quick Reference", "kind": "PDF", "url": "#" }
+      { "title": "BJCP Scoresheet (blank)", "kind": "PDF", "access": "public", "url": "https://drive.google.com/file/d/PUBLIC_FILE_ID_1/view" },
+      { "title": "New Member Tasting Guide", "kind": "PDF", "access": "public", "url": "https://drive.google.com/file/d/PUBLIC_FILE_ID_2/view" },
+      { "title": "Off-Flavor Reference Sheet", "kind": "DOC", "access": "members", "url": "" }
     ]
   },
   {
     "title": "Member Recipes",
-    "blurb": "Tried, tasted, and club-approved",
+    "blurb": "Award-winning and club-favorite recipes.",
     "items": [
-      { "title": "Cream Ale — BOS Challenge Recipe", "kind": "PDF", "url": "#" },
-      { "title": "Traditional Mead — Show Medalist", "kind": "PDF", "url": "#" },
-      { "title": "Dry Cider — Fall Pressing", "kind": "DOC", "url": "#" },
-      { "title": "Kentucky Common — Historical", "kind": "PDF", "url": "#" }
+      { "title": "House Pale Ale (club recipe)", "kind": "DOC", "access": "members", "url": "" },
+      { "title": "2025 Comp-Winning Meads", "kind": "DOC", "access": "members", "url": "" },
+      { "title": "Member Recipe Roster (with contacts)", "kind": "PDF", "access": "members", "url": "" }
     ]
   },
   {
     "title": "Presentations",
-    "blurb": "Slides from past educational topics",
+    "blurb": "Slides from past monthly education sessions.",
     "items": [
-      { "title": "Hops: Varieties, Usage & Timing", "kind": "PPT", "url": "#" },
-      { "title": "Reading BJCP Cider Scoresheets", "kind": "PPT", "url": "#" },
-      { "title": "Yeast Health & Fermentation Temps", "kind": "PPT", "url": "#" },
-      { "title": "Kegging vs. Bottling", "kind": "PPT", "url": "#" }
+      { "title": "Intro to Water Chemistry", "kind": "PPT", "access": "public", "url": "https://drive.google.com/file/d/PUBLIC_FILE_ID_3/view" },
+      { "title": "Wild Fermentation Workshop", "kind": "PPT", "access": "members", "url": "" }
     ]
   }
 ]

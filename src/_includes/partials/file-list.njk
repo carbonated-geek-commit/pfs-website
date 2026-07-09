@@ -1,0 +1,29 @@
+{#
+  Library file row, three states:
+  - public            → direct link
+  - members, url set  → direct link (Google Drive enforces the gate)
+  - members, no url   → "draped": links to member sign-in, no file URL emitted
+#}
+{% macro fileRow(f, collectionTitle, memberSignInUrl) %}
+{%- if f.access != "members" -%}
+<a class="collection__row" href="{{ f.url }}" target="_blank" rel="noopener" data-analytics="resource_download" data-collection="{{ collectionTitle }}" data-file-name="{{ f.title }}">
+  <span class="chip chip--{{ f.kind | lower }}">{{ f.kind }}</span>
+  <span class="collection__file">{{ f.title }}</span>
+  <span class="collection__action" aria-hidden="true">↓</span>
+</a>
+{%- elif f.url -%}
+<a class="collection__row" href="{{ f.url }}" target="_blank" rel="noopener" data-analytics="resource_download" data-collection="{{ collectionTitle }}" data-file-name="{{ f.title }}" data-access="members">
+  <span class="chip chip--{{ f.kind | lower }}">{{ f.kind }}</span>
+  <span class="collection__file">{{ f.title }}</span>
+  <span class="collection__members-tag">Members</span>
+  <span class="collection__action" aria-hidden="true">↓</span>
+</a>
+{%- else -%}
+<a class="collection__row collection__row--locked" href="{{ memberSignInUrl }}" target="_blank" rel="noopener" data-analytics="member_signin_click" data-collection="{{ collectionTitle }}" aria-label="{{ f.title }} — members only, sign in required">
+  <span class="chip chip--{{ f.kind | lower }}">{{ f.kind }}</span>
+  <span class="collection__file">{{ f.title }}</span>
+  <span class="collection__members-tag">Members</span>
+  <span class="collection__action collection__action--signin">Sign in</span>
+</a>
+{%- endif -%}
+{% endmacro %}

@@ -17,10 +17,11 @@ permalink: /resources/
   <div class="members-banner__inner container">
     <span class="members-banner__chip">Members Only</span>
     <span class="members-banner__text">Downloads require a member sign-in — file links are no longer public, and folder metadata stays private.</span>
-    <a class="btn btn--cream members-banner__signin" href="{{ site.memberSignInUrl or 'mailto:' + site.email + '?subject=Member sign-in access' }}" data-analytics="member_signin_click">Member Sign-In</a>
+    <a class="btn btn--cream members-banner__signin" href="{{ site.memberSignInUrl }}" data-analytics="member_signin_click">Member Sign-In</a>
   </div>
 </div>
 
+{% from "partials/file-list.njk" import fileRow %}
 <section class="library">
   <div class="library__inner container">
     {% for col in library %}
@@ -34,11 +35,7 @@ permalink: /resources/
       </button>
       <div class="collection__body">
         {% for doc in col.items %}
-        <div class="collection__row">
-          <span class="chip chip--{{ doc.kind | lower }}">{{ doc.kind }}</span>
-          <span class="collection__file">{{ doc.title }}</span>
-          <a class="collection__download" href="{{ doc.url }}" aria-label="Download {{ doc.title }}" data-analytics="resource_download" data-collection="{{ col.title }}" data-file-name="{{ doc.title }}">↓</a>
-        </div>
+        {{ fileRow(doc, col.title, site.memberSignInUrl) }}
         {% endfor %}
         <div class="collection__note">Sample items — synced from the club's document store.</div>
       </div>
