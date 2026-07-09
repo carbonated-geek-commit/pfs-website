@@ -4,7 +4,7 @@ backend:
   name: github
   repo: carbonated-geek-commit/pfs-website
   branch: main
-  base_url: REPLACE_WITH_WORKER_URL # e.g. https://sveltia-cms-auth.xxx.workers.dev
+  base_url: https://sveltia-cms-auth.corban-caudle-mi.workers.dev
 
 site_url: https://carbonated-geek-commit.github.io/pfs-website
 display_url: https://carbonated-geek-commit.github.io/pfs-website
