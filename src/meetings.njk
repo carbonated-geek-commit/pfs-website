@@ -56,7 +56,11 @@ permalink: /meetings/
           </div>
           <p class="minutes__synopsis">{{ doc.synopsis }}</p>
         </div>
-        <a class="minutes__download" href="{{ doc.url }}" data-analytics="minutes_download" data-file-name="{{ doc.month | slugSafe }}-minutes.pdf" data-month="{{ doc.month }}">Download ↓</a>
+        {% if doc.url %}
+        <a class="minutes__download" href="{{ doc.url }}" target="_blank" rel="noopener"{% if doc.access == "members" %} data-access="members"{% endif %} data-analytics="minutes_download" data-file-name="{{ doc.month | slugSafe }}-minutes.pdf" data-month="{{ doc.month }}">Download ↓</a>
+        {% else %}
+        <a class="minutes__download minutes__download--locked" href="{{ site.memberSignInUrl }}" target="_blank" rel="noopener" data-analytics="member_signin_click" data-month="{{ doc.month }}">Members · Sign in</a>
+        {% endif %}
       </div>
       {% endfor %}
     </div>
