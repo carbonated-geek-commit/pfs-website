@@ -1056,7 +1056,11 @@ a.collection__row:hover { background: var(--cream); color: inherit; }
   font-weight: 700;
   color: var(--hop-green);
 }
-.welcome__form { display: flex; gap: 8px; width: 100%; margin-top: 4px; }
+.welcome__form { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 4px; }
+.welcome__name-row { display: flex; gap: 8px; }
+.welcome__name-row > .welcome__input { flex: 1; min-width: 0; }
+.welcome__submit-row { display: flex; gap: 8px; }
+.welcome__error { margin: 0; font-size: 13.5px; line-height: 1.4; color: var(--brick); text-align: left; }
 .welcome__input {
   flex: 1;
   min-width: 0;
@@ -1318,6 +1322,7 @@ a.collection__row:hover { background: var(--cream); color: inherit; }
   .committee__grid { grid-template-columns: 1fr; }
   .merch__grid { grid-template-columns: 1fr; }
   .hero__title { font-size: 30px; }
+  .welcome__name-row { flex-direction: column; }
 }
 
 /* Very narrow screens (folding-phone cover displays, ~280px) */

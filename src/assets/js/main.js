@@ -31,6 +31,26 @@
     });
   });
 
+  /* ---- Mailchimp (classic JSONP endpoint; GitHub Pages has no backend) --- */
+  function mcSubscribe(fields, onResult) {
+    var cb = "mc_cb_" + Date.now();
+    var script = document.createElement("script");
+    window[cb] = function (data) { delete window[cb]; script.remove(); onResult(data); };
+    script.onerror = function () { delete window[cb]; script.remove(); onResult({ result: "error", msg: "Network error — please try again." }); };
+    var params = new URLSearchParams({
+      u: "25ebde4055cd3c9d70aca9f9b",
+      id: "fe171e755e",
+      EMAIL: fields.email,
+      FNAME: fields.fname,
+      LNAME: fields.lname,
+      tags: "10535816",
+      b_25ebde4055cd3c9d70aca9f9b_fe171e755e: "",
+      c: cb
+    });
+    script.src = "https://club.us12.list-manage.com/subscribe/post-json?" + params.toString();
+    document.body.appendChild(script);
+  }
+
   /* ---- Welcome popover --------------------------------------------------- */
   var WELCOME_KEY = "pfs-welcome-dismissed";
   var welcome = document.getElementById("welcome-popover");
@@ -56,21 +76,42 @@
     });
 
     var form = welcome.querySelector(".welcome__form");
-    var input = welcome.querySelector(".welcome__input");
+    var fnameInput = welcome.querySelector("#pop-fname");
+    var lnameInput = welcome.querySelector("#pop-lname");
+    var emailInput = welcome.querySelector('.welcome__input[type="email"]');
     var success = welcome.querySelector(".welcome__success");
-    if (form && input && success) {
+    var errorEl = welcome.querySelector(".welcome__error");
+    var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+
+    function showWelcomeError(msg) {
+      if (!errorEl) return;
+      errorEl.textContent = msg;
+      errorEl.hidden = !msg;
+    }
+
+    if (form && fnameInput && lnameInput && emailInput && success) {
       form.addEventListener("submit", function (e) {
         e.preventDefault();
-        if (!/.+@.+\..+/.test(input.value)) {
-          input.focus();
-          return;
-        }
-        // TODO: post to the club's newsletter backend (Mailchimp/Buttondown)
-        // before relying on this form — right now it only confirms locally.
-        track("newsletter_signup", {});
-        form.hidden = true;
-        success.hidden = false;
-        setTimeout(dismissWelcome, 1400);
+        var fname = fnameInput.value.trim();
+        var lname = lnameInput.value.trim();
+        var email = emailInput.value.trim();
+        if (!fname || !lname) { showWelcomeError("Please add your first and last name."); return; }
+        if (!/.+@.+\..+/.test(email)) { showWelcomeError("Please enter a valid email address."); return; }
+        showWelcomeError("");
+        if (submitBtn) submitBtn.disabled = true;
+        mcSubscribe({ email: email, fname: fname, lname: lname }, function (data) {
+          if (submitBtn) submitBtn.disabled = false;
+          // Mailchimp double opt-in: success means a confirmation email was sent
+          if (data.result === "success" || /already subscribed/i.test(data.msg || "")) {
+            track("newsletter_signup", {});
+            form.hidden = true;
+            success.hidden = false;
+            try { localStorage.setItem(WELCOME_KEY, "1"); } catch (err) {}
+            setTimeout(dismissWelcome, 1400);
+          } else {
+            showWelcomeError(String(data.msg || "").replace(/<[^>]*>/g, "") || "Something went wrong — please try again.");
+          }
+        });
       });
     }
   }
@@ -86,7 +127,6 @@
     var el = e.target.closest("[data-analytics]");
     if (!el) return;
     var name = el.dataset.analytics;
-    if (name === "newsletter_signup") return; // fired on successful submit instead
     var params = {};
     Object.keys(el.dataset).forEach(function (key) {
       if (key === "analytics" || key === "welcomeDismiss") return;

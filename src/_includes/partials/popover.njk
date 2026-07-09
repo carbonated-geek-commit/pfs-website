@@ -4,10 +4,17 @@
     <img src="/assets/img/seal-192.png" alt="" width="96" height="96">
     <h2 class="welcome__title" id="welcome-title">Stay in the loop</h2>
     <p class="welcome__copy">Get the monthly meeting program, competition announcements, and club news — one email a month, no spam.</p>
-    <div class="welcome__success" hidden>Thanks — you're on the list!</div>
+    <div class="welcome__success" hidden>Almost done — check your email to confirm your subscription.</div>
     <form class="welcome__form" novalidate>
-      <input class="welcome__input" type="email" placeholder="you@email.com" aria-label="Email address" required>
-      <button class="btn btn--amber" type="submit" data-analytics="newsletter_signup">Sign Up</button>
+      <div class="welcome__name-row">
+        <input class="welcome__input" type="text" id="pop-fname" name="fname" placeholder="First name" autocomplete="given-name" aria-label="First name" required>
+        <input class="welcome__input" type="text" id="pop-lname" name="lname" placeholder="Last name" autocomplete="family-name" aria-label="Last name" required>
+      </div>
+      <div class="welcome__submit-row">
+        <input class="welcome__input" type="email" placeholder="you@email.com" autocomplete="email" aria-label="Email address" required>
+        <button class="btn btn--amber" type="submit">Sign Up</button>
+      </div>
+      <p class="welcome__error" role="alert" hidden></p>
     </form>
     <div class="welcome__divider"><span></span><em>Or</em><span></span></div>
     <div class="welcome__actions">
