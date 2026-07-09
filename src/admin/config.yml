@@ -89,9 +89,14 @@ collections:
             summary: "{{fields.month}}"
             fields:
               - name: id
-                label: Drive file ID
-                widget: string
-                hint: "The Google Drive file id of the month's minutes (run npm run sync:drive to list files; the id is in the file's Drive URL). File links come from the sync — this only attaches a synopsis."
+                label: Minutes document
+                widget: relation
+                collection: minutes_docs
+                file: minutes_files
+                value_field: "{{files.*.id}}"
+                display_fields: ["{{files.*.title}}"]
+                search_fields: ["{{files.*.title}}"]
+                hint: "Pick the month's minutes document (synced from Drive). This attaches your synopsis to that file."
               - name: month
                 label: Month
                 widget: string
@@ -103,6 +108,32 @@ collections:
 
   # NOTE: library.json is machine-owned — written by scripts/sync-drive.js.
   # It is deliberately NOT editable in the CMS.
+
+  # Reference data for the minutes-document picker above. Sveltia has no way
+  # to hide or lock a collection, hence the loud label: this file is written
+  # by scripts/sync-drive.js and any manual edit will be overwritten.
+  - divider: true
+  - name: minutes_docs
+    label: "Drive Files — DO NOT EDIT (auto-synced)"
+    icon: sync
+    files:
+      - name: minutes_files
+        label: "Minutes documents (written by the Drive sync)"
+        file: src/_data/minutes_files.json
+        fields:
+          - name: files
+            label: Files
+            label_singular: File
+            widget: list
+            root: true
+            summary: "{{fields.title}}"
+            fields:
+              - { name: id, label: Drive file ID, widget: string }
+              - { name: title, label: Title, widget: string }
+              - { name: kind, label: Kind, widget: string }
+              - { name: access, label: Access, widget: string }
+              - { name: url, label: URL, widget: string, required: false }
+              - { name: modified, label: Modified, widget: string }
 
   - name: committee
     label: Executive Committee
