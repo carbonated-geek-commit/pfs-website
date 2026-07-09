@@ -45,24 +45,28 @@ permalink: /meetings/
   <div class="minutes__inner container">
     <h2 class="h2">Agendas &amp; Minutes</h2>
     <p class="minutes__intro">Meeting records live in the member library. Each month's minutes get an auto-generated synopsis so you can catch up at a glance.</p>
+    {% if minutesJoined.length %}
     <div class="minutes__table">
-      {% for doc in minutes %}
+      {% for doc in minutesJoined %}
       <div class="minutes__row">
-        <span class="chip chip--pdf">PDF</span>
+        <span class="chip chip--{{ doc.kind | lower }}">{{ doc.kind }}</span>
         <div class="minutes__body">
           <div class="minutes__head">
             <span class="minutes__month">{{ doc.month }}</span>
-            <span class="minutes__title">{{ doc.title }}</span>
+            <span class="minutes__title">Agenda &amp; Minutes</span>
           </div>
-          <p class="minutes__synopsis">{{ doc.synopsis }}</p>
+          {% if doc.synopsis %}<p class="minutes__synopsis">{{ doc.synopsis }}</p>{% endif %}
         </div>
         {% if doc.url %}
-        <a class="minutes__download" href="{{ doc.url }}" target="_blank" rel="noopener"{% if doc.access == "members" %} data-access="members"{% endif %} data-analytics="minutes_download" data-file-name="{{ doc.month | slugSafe }}-minutes.pdf" data-month="{{ doc.month }}">Download ↓</a>
+        <a class="minutes__download" href="{{ doc.url }}" target="_blank" rel="noopener"{% if doc.access == "members" %} data-access="members"{% endif %} data-analytics="minutes_download" data-file-name="{{ doc.title }}" data-month="{{ doc.month }}">Download ↓</a>
         {% else %}
         <a class="minutes__download minutes__download--locked" href="{{ site.memberSignInUrl }}" target="_blank" rel="noopener" data-analytics="member_signin_click" data-month="{{ doc.month }}">Members · Sign in</a>
         {% endif %}
       </div>
       {% endfor %}
     </div>
+    {% else %}
+    <p class="minutes__intro">Meeting records are being migrated to the new member library and will appear here shortly.</p>
+    {% endif %}
   </div>
 </section>

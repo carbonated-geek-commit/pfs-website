@@ -82,93 +82,27 @@ collections:
         file: src/_data/minutes.json
         fields:
           - name: minutes
-            label: Months
-            label_singular: Month
+            label: Synopses
+            label_singular: Synopsis
             widget: list
             root: true
             summary: "{{fields.month}}"
             fields:
+              - name: id
+                label: Drive file ID
+                widget: string
+                hint: "The Google Drive file id of the month's minutes (run npm run sync:drive to list files; the id is in the file's Drive URL). File links come from the sync — this only attaches a synopsis."
               - name: month
                 label: Month
                 widget: string
                 hint: "e.g. June 2026"
-              - name: title
-                label: Label
-                widget: string
-                default: "Agenda & Minutes"
               - name: synopsis
                 label: Synopsis
                 widget: text
                 hint: "2–3 line summary of the minutes: topics covered, styles tasted, challenge results, votes or announcements."
-              - name: access
-                label: Access
-                widget: select
-                default: members
-                options:
-                  - { label: "Members only", value: members }
-                  - { label: "Public", value: public }
-              - name: url
-                label: File URL
-                widget: string
-                required: false
-                hint: "Link to the single FILE for this month's minutes. Leave blank until the file is restricted to the members group — blank shows the Sign in placeholder."
-                pattern:
-                  [
-                    '^(?!.*drive\.google\.com/drive)(?!.*/folders/).*$',
-                    "Google Drive FOLDER links are not allowed — link a single file, or leave this blank until the file is gated.",
-                  ]
 
-  - name: library
-    label: Library
-    icon: folder_open
-    files:
-      - name: library
-        label: Library Collections
-        file: src/_data/library.json
-        fields:
-          - name: collections
-            label: Collections
-            label_singular: Collection
-            widget: list
-            root: true
-            summary: "{{fields.title}}"
-            fields:
-              - name: title
-                label: Collection title
-                widget: string
-              - name: blurb
-                label: Blurb
-                widget: string
-              - name: items
-                label: Files
-                label_singular: File
-                widget: list
-                summary: "{{fields.title}} ({{fields.kind}})"
-                fields:
-                  - name: title
-                    label: File name
-                    widget: string
-                  - name: kind
-                    label: Type
-                    widget: select
-                    options: [PDF, DOC, PPT]
-                  - name: access
-                    label: Access
-                    widget: select
-                    default: members
-                    options:
-                      - { label: "Members only", value: members }
-                      - { label: "Public", value: public }
-                  - name: url
-                    label: File URL
-                    widget: string
-                    required: false
-                    hint: "Link to the single FILE. For members files, leave blank until the file is restricted to the members group — blank shows the Sign in placeholder."
-                    pattern:
-                      [
-                        '^(?!.*drive\.google\.com/drive)(?!.*/folders/).*$',
-                        "Google Drive FOLDER links are not allowed — link a single file, or leave this blank until the file is gated.",
-                      ]
+  # NOTE: library.json is machine-owned — written by scripts/sync-drive.js.
+  # It is deliberately NOT editable in the CMS.
 
   - name: committee
     label: Executive Committee
