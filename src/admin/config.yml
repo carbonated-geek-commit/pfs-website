@@ -282,15 +282,11 @@ collections:
           - { name: email, label: Contact email, widget: string }
           - { name: established, label: Established (year), widget: string }
           - { name: copyrightYear, label: Copyright year, widget: string }
+          # Preserved on save but not editable by officers
           - name: analyticsId
-            label: GA4 Measurement ID
-            widget: string
-            required: false
-            hint: "Leave as-is unless the analytics property changes."
+            widget: hidden
           - name: memberSignInUrl
-            label: Member sign-in URL
-            widget: string
-            hint: "Where Members · Sign in links point (the members Google Group or access-instructions page)."
+            widget: hidden
           - name: meeting
             label: Regular meeting
             widget: object
@@ -316,7 +312,8 @@ collections:
             label: Competition
             widget: object
             fields:
-              - { name: entryUrl, label: Entry site URL, widget: string }
+              # Preserved on save but not editable by officers
+              - { name: entryUrl, widget: hidden }
           - name: social
             label: Social links
             widget: object
