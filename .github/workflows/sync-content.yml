@@ -1,0 +1,70 @@
+name: Sync content from Google Drive
+
+# Enable ONLY after:
+#   1. The four Drive folders are restricted and shared with
+#      pfs-website-sync@gen-lang-client-0935245991.iam.gserviceaccount.com (Viewer)
+#   2. `npm run sync:drive` has been run locally and exits clean
+#   3. GATED has been flipped to true in scripts/sync-drive.js and verified
+#
+# Until then, keep this file but leave the `schedule:` block commented out —
+# a failing weekly job that nobody reads is worse than no job.
+
+on:
+  # schedule:
+  #   - cron: '0 12 * * 1'      # Mondays 12:00 UTC (~4/5am Pacific)
+  workflow_dispatch:            # manual "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - name: Pull file lists from Google Drive
+        env:
+          GDRIVE_SA_KEY: ${{ secrets.GDRIVE_SA_KEY }}
+        run: npm run sync:drive
+        # This step FAILS INTENTIONALLY if a members-only file is publicly
+        # readable, or if a folder can't be read. Nothing is written on failure.
+        # A red X here means "go fix Drive permissions", not "the script is broken."
+
+      - name: Verify the site still builds
+        run: npm run build
+
+      - name: Commit if content changed
+        id: commit
+        run: |
+          git config user.name  "PFS Content Bot"
+          git config user.email "actions@github.com"
+          if [[ -z "$(git status --porcelain src/_data)" ]]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No content changes."
+            exit 0
+          fi
+          git add src/_data
+          git commit -m "Content update from Google Drive"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+  # A push made with the default GITHUB_TOKEN does not trigger deploy.yml's
+  # `on: push` (GitHub blocks workflow recursion), so the deploy is chained
+  # here explicitly via workflow_call instead.
+  deploy:
+    needs: sync
+    if: needs.sync.outputs.changed == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
