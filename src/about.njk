@@ -17,17 +17,30 @@ permalink: /about/
   <div class="committee__inner container">
     <h2 class="h2">Executive Committee</h2>
     <div class="committee__grid">
-      {% for member in committee %}
-      <div class="card committee__card">
+      {% for member in committee.current %}
+      <div class="card committee__card{% if member.vacant %} committee__card--vacant{% endif %}">
         {% if member.photo %}
         <img class="committee__photo" src="{{ member.photo }}" alt="{{ member.name }}">
         {% else %}
         <div class="committee__photo committee__photo--empty">Photo</div>
         {% endif %}
         <div class="committee__who">
-          <span class="committee__role">{{ member.role }}</span>
-          <span class="committee__name">{{ member.name }}</span>
+          <span class="committee__role"><a href="mailto:{{ member.email }}">{{ member.role }}</a></span>
+          <span class="committee__name">{% if member.name %}{{ member.name }}{% else %}Vacant — volunteer?{% endif %}</span>
         </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="committee__past">
+      <h3 class="h3">Past Officers</h3>
+      {% for term in committee.past %}
+      <div class="committee__term">
+        <span class="committee__term-year">{{ term.year }}</span>
+        <ul class="committee__term-list">
+          {% for o in term.officers %}
+          <li>{{ o.role }}: {{ o.name }}</li>
+          {% endfor %}
+        </ul>
       </div>
       {% endfor %}
     </div>
