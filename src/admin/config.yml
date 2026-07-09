@@ -1,0 +1,342 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: carbonated-geek-commit/pfs-website
+  branch: main
+  base_url: REPLACE_WITH_WORKER_URL # e.g. https://sveltia-cms-auth.xxx.workers.dev
+
+site_url: https://carbonated-geek-commit.github.io/pfs-website
+display_url: https://carbonated-geek-commit.github.io/pfs-website
+
+media_folder: src/assets/img/uploads
+public_folder: /assets/img/uploads
+
+collections:
+  - name: schedule
+    label: Meeting Schedule
+    icon: calendar_month
+    files:
+      - name: meetings
+        label: Meeting Schedule
+        file: src/_data/meetings.json
+        fields:
+          - name: meetings
+            label: Meetings
+            label_singular: Meeting
+            widget: list
+            root: true
+            summary: "{{fields.date}} — {{fields.education}}"
+            fields:
+              - name: date
+                label: Date
+                widget: string
+                hint: "Meeting date as YYYY-MM-DD, e.g. 2026-08-04. Past/Next/Upcoming states are computed automatically."
+                pattern: ['^\d{4}-\d{2}-\d{2}$', "Use the YYYY-MM-DD format, e.g. 2026-08-04"]
+              - name: education
+                label: Education topic
+                widget: string
+              - name: style
+                label: Style Discussion
+                widget: object
+                fields:
+                  - name: text
+                    label: Text shown on the schedule
+                    widget: string
+                    hint: "e.g. Kentucky Common (historical)"
+                  - name: home
+                    label: Homepage link (optional)
+                    widget: object
+                    required: false
+                    hint: "Only used when this is the next meeting — lets the style name link to bjcp.org on the homepage."
+                    fields:
+                      - { name: before, label: Text before the link, widget: string, required: false, default: "" }
+                      - { name: linkText, label: Link text, widget: string, required: false }
+                      - { name: linkUrl, label: Link URL, widget: string, required: false }
+                      - { name: after, label: Text after the link, widget: string, required: false, default: "" }
+              - name: challenge
+                label: Ferment-to-Style challenge
+                widget: object
+                fields:
+                  - name: text
+                    label: Text shown on the schedule
+                    widget: string
+                    hint: "e.g. BOS Same-Recipe — 1C: Cream Ale"
+                  - name: home
+                    label: Homepage link (optional)
+                    widget: object
+                    required: false
+                    hint: "Only used when this is the next meeting — lets the style name link to bjcp.org on the homepage."
+                    fields:
+                      - { name: before, label: Text before the link, widget: string, required: false, default: "" }
+                      - { name: linkText, label: Link text, widget: string, required: false }
+                      - { name: linkUrl, label: Link URL, widget: string, required: false }
+                      - { name: after, label: Text after the link, widget: string, required: false, default: "" }
+
+  - name: minutes
+    label: Agendas & Minutes
+    icon: description
+    files:
+      - name: minutes
+        label: Agendas & Minutes
+        file: src/_data/minutes.json
+        fields:
+          - name: minutes
+            label: Months
+            label_singular: Month
+            widget: list
+            root: true
+            summary: "{{fields.month}}"
+            fields:
+              - name: month
+                label: Month
+                widget: string
+                hint: "e.g. June 2026"
+              - name: title
+                label: Label
+                widget: string
+                default: "Agenda & Minutes"
+              - name: synopsis
+                label: Synopsis
+                widget: text
+                hint: "2–3 line summary of the minutes: topics covered, styles tasted, challenge results, votes or announcements."
+              - name: access
+                label: Access
+                widget: select
+                default: members
+                options:
+                  - { label: "Members only", value: members }
+                  - { label: "Public", value: public }
+              - name: url
+                label: File URL
+                widget: string
+                required: false
+                hint: "Link to the single FILE for this month's minutes. Leave blank until the file is restricted to the members group — blank shows the Sign in placeholder."
+                pattern:
+                  [
+                    '^(?!.*drive\.google\.com/drive)(?!.*/folders/).*$',
+                    "Google Drive FOLDER links are not allowed — link a single file, or leave this blank until the file is gated.",
+                  ]
+
+  - name: library
+    label: Library
+    icon: folder_open
+    files:
+      - name: library
+        label: Library Collections
+        file: src/_data/library.json
+        fields:
+          - name: collections
+            label: Collections
+            label_singular: Collection
+            widget: list
+            root: true
+            summary: "{{fields.title}}"
+            fields:
+              - name: title
+                label: Collection title
+                widget: string
+              - name: blurb
+                label: Blurb
+                widget: string
+              - name: items
+                label: Files
+                label_singular: File
+                widget: list
+                summary: "{{fields.title}} ({{fields.kind}})"
+                fields:
+                  - name: title
+                    label: File name
+                    widget: string
+                  - name: kind
+                    label: Type
+                    widget: select
+                    options: [PDF, DOC, PPT]
+                  - name: access
+                    label: Access
+                    widget: select
+                    default: members
+                    options:
+                      - { label: "Members only", value: members }
+                      - { label: "Public", value: public }
+                  - name: url
+                    label: File URL
+                    widget: string
+                    required: false
+                    hint: "Link to the single FILE. For members files, leave blank until the file is restricted to the members group — blank shows the Sign in placeholder."
+                    pattern:
+                      [
+                        '^(?!.*drive\.google\.com/drive)(?!.*/folders/).*$',
+                        "Google Drive FOLDER links are not allowed — link a single file, or leave this blank until the file is gated.",
+                      ]
+
+  - name: committee
+    label: Executive Committee
+    icon: groups
+    files:
+      - name: committee
+        label: Executive Committee
+        file: src/_data/committee.json
+        fields:
+          - name: current
+            label: Current officers
+            label_singular: Officer
+            widget: list
+            summary: "{{fields.role}} — {{fields.name}}"
+            fields:
+              - name: role
+                label: Role
+                widget: string
+              - name: name
+                label: Name
+                widget: string
+                required: false
+                hint: "Leave blank for a vacant seat."
+              - name: email
+                label: Role email
+                widget: string
+                hint: "e.g. president@peninsulafermentation.org"
+              - name: vacant
+                label: Vacant
+                widget: boolean
+                required: false
+                default: false
+              - name: photo
+                label: Photo
+                widget: image
+                required: false
+          - name: past
+            label: Past officers
+            label_singular: Term
+            widget: list
+            summary: "{{fields.year}}"
+            fields:
+              - name: year
+                label: Year
+                widget: number
+                value_type: int
+              - name: officers
+                label: Officers
+                label_singular: Officer
+                widget: list
+                summary: "{{fields.role}}: {{fields.name}}"
+                fields:
+                  - { name: role, label: Role, widget: string }
+                  - { name: name, label: Name, widget: string }
+
+  - name: merch
+    label: Merchandise
+    icon: storefront
+    files:
+      - name: merch
+        label: Merchandise
+        file: src/_data/merch.json
+        fields:
+          - name: products
+            label: Products
+            label_singular: Product
+            widget: list
+            root: true
+            summary: "{{fields.name}} — ${{fields.price}}"
+            fields:
+              - name: name
+                label: Product name
+                widget: string
+              - name: slug
+                label: Slug
+                widget: string
+                pattern: ['^[a-z0-9-]+$', "Lowercase letters, numbers, and hyphens only"]
+              - name: price
+                label: Price (USD)
+                widget: number
+                value_type: int
+              - name: description
+                label: Description
+                widget: text
+              - name: photo
+                label: Photo
+                widget: image
+                required: false
+                hint: "Shows 'Photo coming soon' until set."
+              - name: image
+                label: Planned photo path (legacy)
+                widget: string
+                required: false
+                hint: "Reserved path under /assets/img/merch/ — not shown on the site."
+              - name: alt
+                label: Photo alt text
+                widget: string
+
+  - name: settings
+    label: Site Settings
+    icon: settings
+    files:
+      - name: site
+        label: Site Settings
+        file: src/_data/site.json
+        fields:
+          - { name: name, label: Site name, widget: string }
+          - { name: shortName, label: Short name, widget: string }
+          - { name: url, label: Canonical URL, widget: string }
+          - { name: description, label: Site description, widget: text }
+          - { name: email, label: Contact email, widget: string }
+          - { name: established, label: Established (year), widget: string }
+          - { name: copyrightYear, label: Copyright year, widget: string }
+          - name: analyticsId
+            label: GA4 Measurement ID
+            widget: string
+            required: false
+            hint: "Leave as-is unless the analytics property changes."
+          - name: memberSignInUrl
+            label: Member sign-in URL
+            widget: string
+            hint: "Where Members · Sign in links point (the members Google Group or access-instructions page)."
+          - name: meeting
+            label: Regular meeting
+            widget: object
+            fields:
+              - { name: cadence, label: Cadence, widget: string, hint: "e.g. First Tuesday, monthly" }
+              - { name: time, label: Time, widget: string }
+              - { name: venueName, label: Venue name, widget: string }
+              - { name: venueUrl, label: Venue website, widget: string }
+              - { name: venueNote, label: Venue note, widget: string, required: false, hint: "e.g. (through September)" }
+              - { name: address, label: Address, widget: string }
+              - { name: addressShort, label: Short address line, widget: string }
+              - { name: mapsUrl, label: Google Maps link, widget: string }
+          - name: venueBanner
+            label: Venue-move banner
+            widget: object
+            fields:
+              - { name: show, label: Show the banner, widget: boolean }
+              - { name: longLead, label: Banner text (desktop lead), widget: string }
+              - { name: shortLead, label: Banner text (mobile lead), widget: string }
+              - { name: venueName, label: New venue name, widget: string }
+              - { name: venueUrl, label: New venue website, widget: string }
+          - name: competition
+            label: Competition
+            widget: object
+            fields:
+              - { name: entryUrl, label: Entry site URL, widget: string }
+          - name: social
+            label: Social links
+            widget: object
+            fields:
+              - { name: facebook, label: Facebook, widget: string }
+              - { name: instagram, label: Instagram, widget: string }
+          - name: community
+            label: Footer community links
+            label_singular: Link
+            widget: list
+            summary: "{{fields.label}}"
+            fields:
+              - { name: label, label: Label, widget: string }
+              - { name: shortLabel, label: Short label (mobile), widget: string }
+              - { name: url, label: URL, widget: string }
+          - name: photos
+            label: Homepage photo band
+            label_singular: Photo
+            widget: list
+            fields:
+              - { name: src, label: Photo, widget: image, required: false }
+              - { name: alt, label: Alt text, widget: string, required: false }
+              - { name: placeholder, label: Placeholder text (shown when no photo), widget: string }
