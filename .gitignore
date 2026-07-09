@@ -7,3 +7,9 @@ _site/
 .claude/settings.local.json
 /PFS Mobile.dc.html
 /PFS Redesign.dc.html
+
+# Never commit credentials / service account keys
+gen-lang-client-*.json
+*-sa-key.json
+*service-account*.json
+*.pem
