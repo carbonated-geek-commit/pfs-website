@@ -32,21 +32,33 @@
   });
 
   /* ---- Mailchimp (classic JSONP endpoint; GitHub Pages has no backend) --- */
-  function mcSubscribe(fields, onResult) {
+  var MC_USER = "25ebde4055cd3c9d70aca9f9b";
+  var MC_LIST = "fe171e755e";
+  var MC_TAG = "10535816";
+  var MC_HONEYPOT = "b_" + MC_USER + "_" + MC_LIST;
+
+  // `extra` is optional: additional Mailchimp params such as interest groups
+  // ({ "group[54348][1]": "1" }) or merge fields ({ MMERGE3: "A friend" }).
+  function mcSubscribe(fields, onResult, extra) {
     var cb = "mc_cb_" + Date.now();
     var script = document.createElement("script");
     window[cb] = function (data) { delete window[cb]; script.remove(); onResult(data); };
     script.onerror = function () { delete window[cb]; script.remove(); onResult({ result: "error", msg: "Network error — please try again." }); };
     var params = new URLSearchParams({
-      u: "25ebde4055cd3c9d70aca9f9b",
-      id: "fe171e755e",
+      u: MC_USER,
+      id: MC_LIST,
       EMAIL: fields.email,
       FNAME: fields.fname,
       LNAME: fields.lname,
-      tags: "10535816",
-      b_25ebde4055cd3c9d70aca9f9b_fe171e755e: "",
+      tags: MC_TAG,
       c: cb
     });
+    params.append(MC_HONEYPOT, ""); // honeypot — must stay empty
+    if (extra) {
+      Object.keys(extra).forEach(function (k) {
+        if (extra[k] !== "" && extra[k] != null) params.append(k, extra[k]);
+      });
+    }
     script.src = "https://club.us12.list-manage.com/subscribe/post-json?" + params.toString();
     document.body.appendChild(script);
   }
@@ -56,7 +68,9 @@
   var welcome = document.getElementById("welcome-popover");
 
   function welcomeDismissed() {
-    try { return localStorage.getItem(WELCOME_KEY) === "1"; } catch (e) { return true; }
+    // Fail OPEN: if storage is blocked (strict privacy / incognito settings),
+    // still show the popover rather than never showing it to those visitors.
+    try { return localStorage.getItem(WELCOME_KEY) === "1"; } catch (e) { return false; }
   }
   function dismissWelcome() {
     try { localStorage.setItem(WELCOME_KEY, "1"); } catch (e) {}
@@ -115,6 +129,64 @@
       });
     }
   }
+
+  /* ---- /join/ newsletter form (no-ops on every other page) --------------- */
+  function initJoinForm() {
+    var form = document.getElementById("join-signup");
+    if (!form) return; // not on /join/
+
+    var btn = document.getElementById("join-submit");
+    var errorBox = document.getElementById("join-error");
+    var successBox = document.getElementById("join-success");
+
+    function showError(msg) {
+      errorBox.textContent = msg;
+      errorBox.hidden = false;
+    }
+
+    btn.addEventListener("click", function () {
+      errorBox.hidden = true;
+
+      var fname = document.getElementById("join-fname").value.trim();
+      var lname = document.getElementById("join-lname").value.trim();
+      var email = document.getElementById("join-email").value.trim();
+
+      // Honeypot: if a bot filled the hidden field, silently pretend success.
+      if (document.getElementById(MC_HONEYPOT).value !== "") {
+        form.hidden = true;
+        successBox.hidden = false;
+        return;
+      }
+
+      if (!fname || !lname) { showError("Please add your first and last name."); return; }
+      if (!/.+@.+\..+/.test(email)) { showError("Please enter a valid email address."); return; }
+
+      var extra = {};
+      form.querySelectorAll('input[name^="group["]:checked').forEach(function (el) {
+        extra[el.name] = el.value;
+      });
+      var referral = document.getElementById("join-referral").value.trim();
+      if (referral) extra.MMERGE3 = referral;
+
+      btn.disabled = true;
+      btn.textContent = "Subscribing…";
+
+      mcSubscribe({ email: email, fname: fname, lname: lname }, function (data) {
+        // "Already subscribed" comes back as an error — treat as soft success
+        if (data.result === "success" || /already subscribed/i.test(data.msg || "")) {
+          track("newsletter_signup", { location: "join_page" });
+          form.hidden = true;
+          successBox.hidden = false;
+          successBox.querySelector(".join-success-name").textContent = fname;
+        } else {
+          btn.disabled = false;
+          btn.textContent = "Subscribe";
+          showError(String(data.msg || "").replace(/<[^>]*>/g, "") || "Something went wrong — please try again.");
+        }
+      }, extra);
+    });
+  }
+  initJoinForm();
 
   /* ---- Analytics: delegated data-analytics click handler ------------------ */
   function track(name, params) {

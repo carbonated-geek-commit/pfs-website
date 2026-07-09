@@ -24,3 +24,63 @@ permalink: /join/
     </div>
   </div>
 </section>
+
+<section class="join-news">
+  <div class="join-news__inner container">
+    <div class="eyebrow">Stay in the loop</div>
+    <h2 class="h2">Subscribe to our newsletter</h2>
+    <p class="join-news__lede">One email a month — meeting reminders, what we're pouring, and competition news.</p>
+
+    <div id="join-signup" class="join-news__form">
+      <div class="join-news__row">
+        <div class="join-news__field">
+          <label class="join-news__label" for="join-fname">First name <span aria-hidden="true">*</span></label>
+          <input class="join-news__input" type="text" id="join-fname" autocomplete="given-name" required>
+        </div>
+        <div class="join-news__field">
+          <label class="join-news__label" for="join-lname">Last name <span aria-hidden="true">*</span></label>
+          <input class="join-news__input" type="text" id="join-lname" autocomplete="family-name" required>
+        </div>
+      </div>
+
+      <div class="join-news__field">
+        <label class="join-news__label" for="join-email">Email address <span aria-hidden="true">*</span></label>
+        <input class="join-news__input" type="email" id="join-email" autocomplete="email" required>
+      </div>
+
+      <fieldset class="join-news__fieldset">
+        <legend class="join-news__label">What do you ferment?</legend>
+        <div class="join-news__checks">
+          <label class="join-news__check"><input type="checkbox" name="group[54348][1]" value="1"> Beer</label>
+          <label class="join-news__check"><input type="checkbox" name="group[54348][2]" value="1"> Cider</label>
+          <label class="join-news__check"><input type="checkbox" name="group[54348][4]" value="1"> Mead</label>
+          <label class="join-news__check"><input type="checkbox" name="group[54348][8]" value="1"> Wine</label>
+        </div>
+      </fieldset>
+
+      <div class="join-news__field">
+        <label class="join-news__label" for="join-referral">How did you hear about us?</label>
+        <input class="join-news__input" type="text" id="join-referral" autocomplete="off">
+      </div>
+
+      {# Honeypot — bots fill it, humans never see it. The field name must match
+         Mailchimp's b_<user>_<list> exactly. Keep this comment in Nunjucks form:
+         a loose JS-style comment here would render as page text. #}
+      <div aria-hidden="true" hidden>
+        <label for="b_25ebde4055cd3c9d70aca9f9b_fe171e755e">Leave this field empty</label>
+        <input type="text" name="b_25ebde4055cd3c9d70aca9f9b_fe171e755e" id="b_25ebde4055cd3c9d70aca9f9b_fe171e755e" tabindex="-1" autocomplete="off" value="">
+      </div>
+
+      <p id="join-error" class="join-news__error" role="alert" hidden></p>
+
+      <button type="button" id="join-submit" class="btn btn--amber" data-analytics="newsletter_signup_click">Subscribe</button>
+
+      <p class="join-news__fineprint">We'll send a confirmation email — click the link in it to finish subscribing. Unsubscribe any time.</p>
+    </div>
+
+    <div id="join-success" class="join-news__success" role="status" hidden>
+      <h3 class="h3">Thanks, <span class="join-success-name"></span>!</h3>
+      <p>Check your email and click the confirmation link to finish subscribing.</p>
+    </div>
+  </div>
+</section>
