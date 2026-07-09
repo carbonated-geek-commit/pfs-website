@@ -9,7 +9,13 @@
     </a>
     <nav class="site-nav" aria-label="Primary">
       <a class="site-nav__link{% if navKey == 'home' %} is-active{% endif %}" href="/" {% if navKey == 'home' %}aria-current="page"{% endif %}>Home</a>
-      <a class="site-nav__link{% if navKey == 'about' %} is-active{% endif %}" href="/about/" {% if navKey == 'about' %}aria-current="page"{% endif %}>About</a>
+      <div class="site-nav__item">
+        <a class="site-nav__link{% if navKey == 'about' %} is-active{% endif %}" href="/about/" {% if navKey == 'about' %}aria-current="page"{% endif %}>About <span class="site-nav__caret" aria-hidden="true">▾</span></a>
+        <div class="site-nav__dropdown">
+          <a class="site-nav__sublink" href="/by-laws/">By-Laws</a>
+          <a class="site-nav__sublink" href="/code-of-conduct/">Code of Conduct</a>
+        </div>
+      </div>
       <a class="site-nav__link{% if navKey == 'meetings' %} is-active{% endif %}" href="/meetings/" {% if navKey == 'meetings' %}aria-current="page"{% endif %}>Meetings &amp; Events</a>
       <a class="site-nav__link{% if navKey == 'competitions' %} is-active{% endif %}" href="/competitions/" {% if navKey == 'competitions' %}aria-current="page"{% endif %}>Competitions</a>
       <a class="site-nav__link{% if navKey == 'resources' %} is-active{% endif %}" href="/resources/" {% if navKey == 'resources' %}aria-current="page"{% endif %}>Resources</a>
@@ -25,6 +31,8 @@
   <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
     <a class="mobile-menu__link" href="/">Home</a>
     <a class="mobile-menu__link" href="/about/">About the Society</a>
+    <a class="mobile-menu__link mobile-menu__link--sub" href="/by-laws/">By-Laws</a>
+    <a class="mobile-menu__link mobile-menu__link--sub" href="/code-of-conduct/">Code of Conduct</a>
     <a class="mobile-menu__link" href="/meetings/">Meetings &amp; Events</a>
     <a class="mobile-menu__link" href="/competitions/">Competitions</a>
     <a class="mobile-menu__link" href="/resources/">Member Resources</a>
