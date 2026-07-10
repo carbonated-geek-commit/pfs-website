@@ -2,16 +2,211 @@
   {
     "title": "Forms & Training Aids",
     "blurb": "Scoresheets, style guidelines, and reference material.",
-    "items": []
+    "items": [
+      {
+        "id": "1mHi0x0kSzguiLIx8Ec6XL1gn33KRdKjG",
+        "title": "7 Steps to Great Beer Judging",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1mHi0x0kSzguiLIx8Ec6XL1gn33KRdKjG/view",
+        "modified": "2024-10-01T03:07:49.263Z"
+      },
+      {
+        "id": "1LfpKqnr_tDqlnN8BT6EzSqHl3Ovo9yV5",
+        "title": "AWS-Wine-Evaluation-Form-1",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1LfpKqnr_tDqlnN8BT6EzSqHl3Ovo9yV5/view",
+        "modified": "2023-11-05T23:49:48.489Z"
+      },
+      {
+        "id": "1EY7CWeNAiJ7CZ479uWMkGbUAi9ytM6Es",
+        "title": "BJCP Beer Score Sheet",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1EY7CWeNAiJ7CZ479uWMkGbUAi9ytM6Es/view",
+        "modified": "2023-08-31T17:09:59.247Z"
+      },
+      {
+        "id": "19TO5oaTQhGVD3W0o1hjaXZq5Ybgrc7Hl",
+        "title": "BJCP Cider Score Sheet",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/19TO5oaTQhGVD3W0o1hjaXZq5Ybgrc7Hl/view",
+        "modified": "2023-08-31T17:10:14.971Z"
+      },
+      {
+        "id": "13Lbszz3Nte7A7I263QnK4WGP1GTRXXwR",
+        "title": "BJCP Mead Score Sheet",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/13Lbszz3Nte7A7I263QnK4WGP1GTRXXwR/view",
+        "modified": "2023-08-31T17:10:36.307Z"
+      },
+      {
+        "id": "1LHKebi7wauPsKWRIUMUg48TaE1lREqdS",
+        "title": "Cider Scoresheet Information",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1LHKebi7wauPsKWRIUMUg48TaE1lREqdS/view",
+        "modified": "2025-05-21T23:01:12.000Z"
+      },
+      {
+        "id": "1jt1t-_TJN3ygzmL-eDWHvnFy5MvAbme0",
+        "title": "How to write a Master Score Sheet",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1jt1t-_TJN3ygzmL-eDWHvnFy5MvAbme0/view",
+        "modified": "2023-09-06T18:23:59.098Z"
+      },
+      {
+        "id": "1-GrEvGhboVrW0mKDvT_OlaYemoPxpYXK",
+        "title": "How_to_Judge_Beer",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1-GrEvGhboVrW0mKDvT_OlaYemoPxpYXK/view",
+        "modified": "2023-08-16T15:07:02.000Z"
+      },
+      {
+        "id": "1M1pXW9logOGrxrbc3x8mguiexZwxYZpu",
+        "title": "PFS Flyer",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1M1pXW9logOGrxrbc3x8mguiexZwxYZpu/view",
+        "modified": "2023-08-31T14:06:19.000Z"
+      },
+      {
+        "id": "1gJ66RKKJKS7BkN8D0tCbMjsla-KR4sON",
+        "title": "Release and Indemnity Agreement",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1gJ66RKKJKS7BkN8D0tCbMjsla-KR4sON/view",
+        "modified": "2023-08-31T17:09:22.785Z"
+      }
+    ]
   },
   {
     "title": "Member Recipes",
-    "blurb": "Award-winning and club-favorite recipes.",
-    "items": []
+    "blurb": "Award-winning and club-favorite recipes shared by members.",
+    "items": [
+      {
+        "id": "1xdC_WSjHiHFIG4oj3oC270annNMbFesy",
+        "title": "(19B) California Common",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1xdC_WSjHiHFIG4oj3oC270annNMbFesy/view",
+        "modified": "2023-11-16T15:01:17.000Z"
+      },
+      {
+        "id": "1uOIUoQO_JXqeZN1c-o9m78DOISDyWdu3",
+        "title": "(20A) Puget Sound Porter",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1uOIUoQO_JXqeZN1c-o9m78DOISDyWdu3/view",
+        "modified": "2023-11-16T18:26:35.000Z"
+      },
+      {
+        "id": "1U1sFC_g9eWssHeGinPfzENf02Q3KgwM_",
+        "title": "(24A) Lawn Cruiser Belgian Witbier",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1U1sFC_g9eWssHeGinPfzENf02Q3KgwM_/view",
+        "modified": "2023-11-16T18:45:28.797Z"
+      }
+    ]
   },
   {
     "title": "Presentations",
     "blurb": "Slides from past monthly education sessions.",
-    "items": []
+    "items": [
+      {
+        "id": "1HsJeZuejm9TZnJ9EspZYq3A40ifxQVfv",
+        "title": "19B. California Common",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1HsJeZuejm9TZnJ9EspZYq3A40ifxQVfv/view",
+        "modified": "2023-09-05T18:55:30.945Z"
+      },
+      {
+        "id": "1hyjYBOxXzVk1gpysgG0Kb5e8j6xEdAKb",
+        "title": "27A. Historical Beer_ Pre-Prohibition Porter",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1hyjYBOxXzVk1gpysgG0Kb5e8j6xEdAKb/view",
+        "modified": "2023-07-31T03:32:39.548Z"
+      },
+      {
+        "id": "1KHoxdUM9l3TEJQL6vMk1mJu8POEeDb7L",
+        "title": "30C. Winter Seasonal Beer",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1KHoxdUM9l3TEJQL6vMk1mJu8POEeDb7L/view",
+        "modified": "2023-10-04T19:09:47.000Z"
+      },
+      {
+        "id": "1CNN2-Og39uzVyUC1jxbselU7GCMxFsof",
+        "title": "3B. Czech Premium Pale Lager",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1CNN2-Og39uzVyUC1jxbselU7GCMxFsof/view",
+        "modified": "2023-11-07T23:30:39.281Z"
+      },
+      {
+        "id": "1sAlejoBnItSLnwrsNCT8DblXqM-ULhLx",
+        "title": "C3B_ Spiced Cider",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1sAlejoBnItSLnwrsNCT8DblXqM-ULhLx/view",
+        "modified": "2026-02-04T14:20:13.000Z"
+      },
+      {
+        "id": "1dFKMFsy9SY1LPVy7MJeuMDMh65I7ROOt",
+        "title": "Cider Apples",
+        "kind": "PPT",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1dFKMFsy9SY1LPVy7MJeuMDMh65I7ROOt/view",
+        "modified": "2025-09-02T13:15:39.000Z"
+      },
+      {
+        "id": "1Y0lHUbhgIslGl-0m3h2bu3pnGdVAPhtf",
+        "title": "Glassware Cleaning",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1Y0lHUbhgIslGl-0m3h2bu3pnGdVAPhtf/view",
+        "modified": "2023-10-04T19:07:28.000Z"
+      },
+      {
+        "id": "1oz0jskIXagbX8gBki9pNAb-ohi9aebnJ",
+        "title": "Glassware",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1oz0jskIXagbX8gBki9pNAb-ohi9aebnJ/view",
+        "modified": "2024-08-07T14:19:23.000Z"
+      },
+      {
+        "id": "1pwN8qHRz_nMLIkNvqsCgje6fMW2bMyHE",
+        "title": "How to Judge",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1pwN8qHRz_nMLIkNvqsCgje6fMW2bMyHE/view",
+        "modified": "2026-03-03T19:39:24.000Z"
+      },
+      {
+        "id": "17Tgxmn5HY7k2p_4gbwyuE2e1UsWxXnBN",
+        "title": "M1A Dry Mead",
+        "kind": "PDF",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/17Tgxmn5HY7k2p_4gbwyuE2e1UsWxXnBN/view",
+        "modified": "2023-11-07T23:31:19.373Z"
+      },
+      {
+        "id": "1PSoqkO3gmKD6pqOykll3JAyQeBfWNbGT",
+        "title": "MHP Presentation 6 Aug 2024",
+        "kind": "PPT",
+        "access": "public",
+        "url": "https://drive.google.com/file/d/1PSoqkO3gmKD6pqOykll3JAyQeBfWNbGT/view",
+        "modified": "2024-08-06T22:38:19.000Z"
+      }
+    ]
   }
 ]
