@@ -1,7 +1,9 @@
 [
   {
     "date": "2026-09-01",
-    "education": "How To Judge",
+    "education": {
+      "text": "How To Judge"
+    },
     "style": {
       "text": "21B: Specialty IPA's",
       "home": {
@@ -23,7 +25,9 @@
   },
   {
     "date": "2026-07-07",
-    "education": "Hops — varieties, usage & timing",
+    "education": {
+      "text": "Hops — varieties, usage & timing"
+    },
     "style": {
       "text": "Kentucky Common (historical)",
       "home": {
@@ -45,7 +49,9 @@
   },
   {
     "date": "2026-08-04",
-    "education": "BJCP Mead Scoresheets",
+    "education": {
+      "text": "BJCP Mead Scoresheets"
+    },
     "style": {
       "text": "16C: Tropical Stout",
       "home": {

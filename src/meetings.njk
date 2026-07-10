@@ -25,7 +25,7 @@ permalink: /meetings/
       <div class="sched-row__program">
         <div class="sched-row__cell">
           <span class="sched-row__label">Education</span>
-          <span class="sched-row__value">{{ mtg.education }}</span>
+          <span class="sched-row__value">{% if mtg.education.url %}<a href="{{ mtg.education.url }}" target="_blank" rel="noopener">{{ mtg.education.text }}</a>{% else %}{{ mtg.education.text }}{% endif %}</span>
         </div>
         <div class="sched-row__cell">
           <span class="sched-row__label">Style Discussion</span>

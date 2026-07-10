@@ -55,7 +55,7 @@ permalink: /
     <div class="program">
       <div class="program__row">
         <span class="program__label">Education</span>
-        <span class="program__value">{{ schedule.next.education }}</span>
+        <span class="program__value">{% if schedule.next.education.url %}<a href="{{ schedule.next.education.url }}" target="_blank" rel="noopener">{{ schedule.next.education.text }}</a>{% else %}{{ schedule.next.education.text }}{% endif %}</span>
       </div>
       <div class="program__row">
         <span class="program__label">Style Discussion</span>

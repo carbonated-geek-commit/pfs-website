@@ -30,6 +30,9 @@ module.exports = function () {
     else if (m.date === nextDate) status = "next";
     return {
       ...m,
+      // Education may be a plain string (legacy) or an object { text, url }.
+      // Normalize to an object so templates can always use .text / .url.
+      education: typeof m.education === "string" ? { text: m.education } : m.education,
       status,
       tag: status === "past" ? "Past" : status === "next" ? "Next meeting" : "Upcoming",
       shortDate: `${MONTHS_SHORT[mo - 1]} ${d}`,

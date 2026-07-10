@@ -40,7 +40,7 @@ collections:
             label_singular: Meeting
             widget: list
             root: true
-            summary: "{{fields.date}} — {{fields.education}}"
+            summary: "{{fields.date}} — {{fields.education.text}}"
             fields:
               - name: date
                 label: Date
@@ -49,7 +49,22 @@ collections:
                 pattern: ['^\d{4}-\d{2}-\d{2}$', "Use the YYYY-MM-DD format, e.g. 2026-08-04"]
               - name: education
                 label: Education topic
-                widget: string
+                widget: object
+                fields:
+                  - name: text
+                    label: Topic
+                    widget: string
+                    hint: "e.g. BJCP Mead Scoresheets"
+                  - name: url
+                    label: Download link (optional)
+                    widget: string
+                    required: false
+                    hint: "Optional Google Drive download link — makes the topic clickable on the schedule and homepage."
+                    pattern:
+                      [
+                        '^(?!.*drive\.google\.com/drive)(?!.*/folders/).*$',
+                        "Google Drive FOLDER links are not allowed — link a single file.",
+                      ]
               - name: style
                 label: Style Discussion
                 widget: object
