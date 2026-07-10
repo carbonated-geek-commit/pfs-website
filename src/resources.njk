@@ -13,32 +13,16 @@ permalink: /resources/
   </div>
 </section>
 
-<div class="members-banner">
-  <div class="members-banner__inner container">
-    <span class="members-banner__chip">Members Only</span>
-    <div class="members-banner__body">
-      <span class="members-banner__text">These files are open to current PFS members. When you open one, Google asks you to sign in — if you're a member, it opens. Not seeing what you expect?</span>
-      <div class="members-banner__actions">
-        <a class="btn btn--cream members-banner__signin" href="{{ site.requestAccessUrl }}" data-analytics="request_access_click">Request access</a>
-        <a class="members-banner__join" href="/join/">Not a member yet? Join the Society →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 {% from "partials/file-list.njk" import fileRow %}
 <section class="library">
   <div class="library__inner container">
     {% for col in library %}
-    <div class="collection{% if loop.first %} is-open{% endif %}" id="{{ col.title | slugSafe }}">
-      <button class="collection__header" type="button" aria-expanded="{% if loop.first %}true{% else %}false{% endif %}">
-        <span class="collection__heading">
-          <span class="collection__title">{{ col.title }}</span>
-          <span class="collection__blurb">{{ col.blurb }}</span>
-        </span>
-        <span class="collection__chevron" aria-hidden="true">▾</span>
-      </button>
-      <div class="collection__body">
+    <div class="collection" id="{{ col.title | slugSafe }}">
+      <div class="collection__header">
+        <span class="collection__title">{{ col.title }}</span>
+        <span class="collection__blurb">{{ col.blurb }}</span>
+      </div>
+      <div class="collection__body{% if col.items.length > 5 %} collection__body--scroll{% endif %}">
         {% for doc in col.items %}
         {{ fileRow(doc, col.title, site.requestAccessUrl) }}
         {% endfor %}

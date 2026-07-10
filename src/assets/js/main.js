@@ -66,25 +66,6 @@
     });
   });
 
-  /* ---- Library accordion (mobile only; headers are inert on desktop) ---- */
-  var collections = Array.prototype.slice.call(document.querySelectorAll(".collection"));
-  collections.forEach(function (col) {
-    var header = col.querySelector(".collection__header");
-    if (!header) return;
-    header.addEventListener("click", function () {
-      var wasOpen = col.classList.contains("is-open");
-      collections.forEach(function (other) {
-        other.classList.remove("is-open");
-        var h = other.querySelector(".collection__header");
-        if (h) h.setAttribute("aria-expanded", "false");
-      });
-      if (!wasOpen) {
-        col.classList.add("is-open");
-        header.setAttribute("aria-expanded", "true");
-      }
-    });
-  });
-
   /* ---- Mailchimp (classic JSONP endpoint; GitHub Pages has no backend) --- */
   var MC_USER = "25ebde4055cd3c9d70aca9f9b";
   var MC_LIST = "fe171e755e";

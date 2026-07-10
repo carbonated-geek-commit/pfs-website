@@ -886,19 +886,12 @@ img { max-width: 100%; }
   overflow: hidden;
 }
 .collection__header {
-  width: 100%;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 4px;
   background: var(--forest-deep);
-  border: none;
-  cursor: default;
   padding: 20px 24px;
-  text-align: left;
-  font-family: inherit;
-  pointer-events: none;
 }
-.collection__heading { display: flex; flex-direction: column; gap: 4px; flex: 1; }
 .collection__title {
   font-family: var(--oswald);
   font-weight: 600;
@@ -908,7 +901,8 @@ img { max-width: 100%; }
   color: var(--cream-on-dark);
 }
 .collection__blurb { font-size: 14px; color: var(--cream-on-dark-2); }
-.collection__chevron { display: none; color: var(--amber-light); font-size: 14px; transition: transform 0.2s; }
+/* Up to ~5 rows, then scroll (≈60px per row × 5). */
+.collection__body--scroll { max-height: 300px; overflow-y: auto; }
 .collection__row {
   display: flex;
   align-items: center;
@@ -1372,14 +1366,10 @@ a.collection__row:hover { background: var(--cream); color: inherit; }
   .members-banner__body { flex-basis: 100%; }
   .members-banner__text { font-size: 13.5px; }
 
-  /* Library → accordion */
+  /* Library → single column of scrollable document lists */
   .library__inner { grid-template-columns: 1fr; padding-top: 20px; padding-bottom: 40px; gap: 10px; }
-  .collection__header { pointer-events: auto; cursor: pointer; padding: 15px 16px; min-height: 48px; }
+  .collection__header { padding: 15px 16px; }
   .collection__title { font-size: 15px; letter-spacing: 0.05em; }
-  .collection__blurb { display: none; }
-  .collection__chevron { display: block; }
-  .collection.is-open .collection__chevron { transform: rotate(180deg); }
-  .collection:not(.is-open) .collection__body { display: none; }
   .collection__row { padding: 12px 16px; }
   .collection__file { font-size: 14px; }
 
