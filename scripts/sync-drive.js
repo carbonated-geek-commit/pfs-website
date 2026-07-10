@@ -39,18 +39,25 @@ const { google } = require('googleapis');
 // While false, members files are published "draped": listed with url: "" so the
 // site renders the sign-in state instead of a working link. The anonymous-reach
 // probe below stays active either way as the second guard.
-const GATED = false;
+const GATED = true;
 
 // ---- configure: folder id -> how it publishes -------------------------------
 // Get an id from the folder URL: drive.google.com/drive/folders/<ID>
+// Agendas & Minutes stay PUBLIC (PII removed; kept public for auditing).
+// Member Recipes stay PUBLIC (no PII). Forms & Presentations are PUBLIC.
+// The "Members Only" folder is the one restricted collection.
 const FOLDERS = [
-  { id: '115uK-KioxUFuSLYxMqz1lxY_1h_2-2es', kind: 'minutes',  access: 'members', title: 'Agendas & Minutes' },
+  { id: '115uK-KioxUFuSLYxMqz1lxY_1h_2-2es', kind: 'minutes',  access: 'public', title: 'Agendas & Minutes' },
+  // A second, restricted minutes folder would go here once it exists:
+  // { id: 'REPLACE_RESTRICTED_MINUTES_FOLDER_ID', kind: 'minutes', access: 'members', title: 'Restricted Minutes' },
   { id: '1ifq77v6Px6jPQqCMhFv_A3MBdcaMbEMU', kind: 'library',  access: 'public',  title: 'Forms & Training Aids',
     blurb: 'Scoresheets, style guidelines, and reference material.' },
-  { id: '1D0YcXIDANh2brhDpLwwOAZCMGCchy-nu', kind: 'library',  access: 'members', title: 'Member Recipes',
+  { id: '1D0YcXIDANh2brhDpLwwOAZCMGCchy-nu', kind: 'library',  access: 'public', title: 'Member Recipes',
     blurb: 'Award-winning and club-favorite recipes shared by members.' },
   { id: '1EqvDVBeAzrYlgGv7ifJyP18O7Jzv1dCW', kind: 'library',  access: 'public',  title: 'Presentations',
     blurb: 'Slides from past monthly education sessions.' },
+  { id: 'REPLACE_MEMBERS_FOLDER_ID',         kind: 'library',  access: 'members', title: 'Members Only',
+    blurb: 'Rosters, contact lists, and documents for current members.' },
 ];
 
 const DATA_DIR = path.join(__dirname, '..', 'src', '_data');
@@ -167,7 +174,9 @@ const kindOf = (mimeType, name) => {
     }
 
     if (folder.kind === 'minutes') {
-      minutesFiles = checked;
+      // Concatenate across all kind:'minutes' folders, each keeping its own
+      // per-file access flag. minutesJoined.js sorts newest-first at build time.
+      minutesFiles.push(...checked);
     } else {
       library.push({ title: folder.title, blurb: folder.blurb, items: checked });
     }
