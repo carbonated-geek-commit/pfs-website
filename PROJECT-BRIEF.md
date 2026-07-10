@@ -33,20 +33,20 @@ Everything under `src/_data/`. **Ownership is strict**: machine-owned files must
 | `meetings.json` | CMS (Meeting Schedule) | Past/Next/Upcoming computed at build time by `schedule.js` (Pacific TZ); also feeds the homepage next-meeting band and `/calendar.ics`. |
 | `committee.json` | CMS | Current officers (role emails, vacancies) + past officers by year. |
 | `merch.json` | CMS | Products; photos pending. Carries a dead `image` field (unused by the template — see Known cruft). |
-| `site.json` | CMS (Site Settings) | Venue/meeting info, venue-move banner + show/hide toggle (verified working end-to-end), socials, community links, photo band. Three fields are `widget: hidden` — preserved on save, not editable: `analyticsId`, `memberSignInUrl`, `competition.entryUrl`. |
+| `site.json` | CMS (Site Settings) | Venue/meeting info, venue-move banner + show/hide toggle (verified working end-to-end), socials, community links, photo band. Three fields are `widget: hidden` — preserved on save, not editable: `analyticsId`, `requestAccessUrl`, `competition.entryUrl`. |
 | `schedule.js`, `minutesJoined.js` | Neither | Build-time compute. `minutesJoined.js` joins `minutes_files.json` ⟕ `minutes.json` by Drive file id, newest first; `meetings.njk` renders the join (rows show a synopsis only where one exists, otherwise just the download link). |
 
 ## The Drive ETL (`scripts/sync-drive.js`)
 
-Enumerates four Drive folders and writes `library.json` + `minutes_files.json`. Service account: `pfs-website-sync@gen-lang-client-0935245991.iam.gserviceaccount.com` (read-only). Key: GitHub secret `GDRIVE_SA_KEY`; locally the same as an env var. The key JSON lives **outside** the repo; `.gitignore` blocks key-file patterns (`gen-lang-client-*.json`, `*-sa-key.json`, `*service-account*.json`, `*.pem`) — verified those patterns ignore a dummy key.
+Enumerates the Drive folders in the `FOLDERS` array and writes `library.json` + `minutes_files.json`. Service account: `pfs-website-sync@gen-lang-client-0935245991.iam.gserviceaccount.com` (read-only). Key: GitHub secret `GDRIVE_SA_KEY`; locally the same as an env var. The key JSON lives **outside** the repo (moving to `C:\Users\corba\.secrets\`); `.gitignore` blocks key-file patterns (`gen-lang-client-*.json`, `*-sa-key.json`, `*service-account*.json`, `*.pem`) — verified those patterns ignore a dummy key.
 
-Folder map (`FOLDERS` array, with folder ids): Agendas & Minutes, Forms & Training Aids, Member Recipes, Presentations. **All four are currently configured `access: 'public'`**, so the sync has run and emitted real per-file view URLs; the site links to them directly. (Earlier the intent was to gate Recipes/Minutes as members-only; that split was never confirmed with the club, and the folders are public today.)
+Folder map (club-confirmed access split): **Agendas & Minutes — public** (PII removed; kept public for auditing), **Member Recipes — public** (no PII), **Forms & Training Aids — public**, **Presentations — public**, and a **Members Only — members** folder for rosters/contact lists. The members folder's id is still `REPLACE_MEMBERS_FOLDER_ID`, so the script's REPLACE_ guard **blocks the whole sync** until the real id is supplied. A commented `Restricted Minutes` (members) folder is left as a template. Multiple `kind:'minutes'` folders are supported — they concatenate, each file keeping its own per-folder access flag; `minutesJoined.js` still sorts newest-first.
 
 Two hard rules, enforced in code:
 1. **Never emit a folder link** — individual files only (folder links leak metadata; closing that leak is why the redesign exists).
-2. **Fail-closed leak probe** (`isAnonymouslyReachable`): a read-only service account can't read sharing settings, so the script tests ground truth — an unauthenticated fetch of each file. For a `members` folder, a file that is anonymously readable is a LEAK: it **fails the whole run, names the file, and writes nothing**. A folder that can't be read is also a loud error with zero writes — the sync never empties a collection. (With all folders public today, the probe passes; it re-arms automatically the moment any folder is set back to `members`.)
+2. **Fail-closed leak probe** (`isAnonymouslyReachable`): a read-only service account can't read sharing settings, so the script tests ground truth — an unauthenticated fetch of each file. For a `members` folder, a file that is anonymously readable is a LEAK: it **fails the whole run, names the file, and writes nothing**. A folder that can't be read is also a loud error with zero writes — the sync never empties a collection.
 
-**`GATED` flag** (top of script, currently `false`): governs only `members` folders. While false, a members file is published "draped" — listed with `url: ""` so the site shows a *Members · Sign in* row instead of a link. Flip to `true` only after the Drive owner restricts a members folder AND a clean verified run; then that folder's files get real per-file links and Drive itself enforces the gate. Moot while every folder is public.
+**`GATED` flag** (top of script, currently `true`): governs only `members` folders. While `false`, a members file is published "draped" — listed with `url: ""` so the site shows a *Request access* row instead of a link. Now `true`: once a members folder is restricted and synced, its files get real per-file links and Drive itself enforces the gate. (The currently-committed `library.json`/`minutes_files.json` are from an earlier all-public sync; they regenerate with the Members Only collection on the first real sync once the folder id lands.)
 
 ## Sync workflow + chained deploy
 
@@ -65,9 +65,15 @@ Two hard rules, enforced in code:
 - **Auth**: GitHub backend via the authorization-code flow through a Cloudflare Worker (sveltia-cms-auth) at `https://sveltia-cms-auth.corban-caudle-mi.workers.dev` (`base_url` in config.yml). Officers need GitHub accounts added as repo collaborators (write); CMS commits are attributed to the signed-in user. The worker's `ALLOWED_DOMAINS` must include both the github.io host and the custom domain during the transition. Developers can also "Sign In Using Access Token" (PAT) or use the local-repository workflow on localhost.
 - Every CMS save pushes to `main` → normal deploy. Governance docs (by-laws, code of conduct) are deliberately repo-only for a review trail. `editorial_workflow` is off.
 
-## Member gating model (site side)
+## Access model — Drive is the gate, the site only labels
 
-`memberSignInUrl` in site.json (currently `mailto:info@peninsulafermentation.org`) is the target of every *Members · Sign in* affordance: the resources members banner, draped library rows, and draped minutes rows. The `file-list.njk` macro renders three states — public (direct link) / members-with-url (direct link, Drive enforces) / members-no-url (draped sign-in). With all folders public today, everything renders as direct links; the draped state only appears for a `members` folder before GATED. The gate itself is always Drive permissions, never JavaScript.
+A static site cannot enforce login; **Google Drive is the gate**. When someone opens a restricted file, Google prompts for sign-in and shows non-members a "Request access" screen. The site's job is only to *label* which files are members-only and point people at the right place — the copy matches Google's language ("Request access"), not a login the site can't provide.
+
+- `requestAccessUrl` in site.json (currently `mailto:info@peninsulafermentation.org`, a hidden CMS field) is the target of every *Request access* affordance: the resources members banner, draped library rows, and draped minutes rows.
+- `file-list.njk` renders three states: **public** → direct link; **members with a real URL** (post-GATED) → **direct link to the file** (Google handles sign-in/request-access — no mailto detour); **members with no URL** (draped) → "Request access" → `requestAccessUrl`.
+- The resources banner explains the mechanism and adds a "Not a member yet? Join the Society →" link.
+- Analytics for these is `request_access_click` (renamed from the old `member_signin_click`; not backward-joinable, never a key event).
+- The welcome popover has **no** members/sign-in button — a first-time visitor has no lock to unlock. It keeps only the newsletter form and the "Join the Society" CTA. (The old `popover_signin_click` event is gone; it survives only in the read-only `design_handoff_pfs_website/` reference bundle.)
 
 ## Other functioning pieces
 
@@ -80,8 +86,8 @@ Two hard rules, enforced in code:
 
 ## Still pending
 
-1. **Drive gating decision + `GATED = true`**: if any folder should be members-only, set its `FOLDERS` entry back to `access: 'members'`, have the owner restrict it and share it to the service account (Viewer), run `npm run sync:drive` clean, then flip `GATED = true` and verify. Confirm the public/members split with the club first.
-2. **Enable the sync cron**: uncomment the `schedule:` block in `sync-content.yml` once gating is settled and the `GDRIVE_SA_KEY` GitHub secret exists.
+1. **Members folder id**: create the "Members Only" Drive folder, restrict it, share it to the service account (Viewer), and replace `REPLACE_MEMBERS_FOLDER_ID` in `FOLDERS`. Until then the sync's REPLACE_ guard blocks every run. `GATED` is already `true`, so once the id lands and a clean sync runs, that folder's files publish as real per-file links (Drive-enforced) and the rest stay draped/public as configured. The `GDRIVE_SA_KEY` GitHub secret must also exist for CI runs.
+2. **Enable the sync cron**: uncomment the `schedule:` block in `sync-content.yml` once the members folder id is in and a manual run is verified.
 3. **Photos**: committee headshots, homepage photo band, merch product photos (upload via the CMS — they become optimized `.webp`).
 4. **2025 competition winners table** — placeholder card on /competitions/ keeps the `#results-2025` anchor; source page had a redirect issue.
 5. **Mailchimp confirmation-email delivery** — a live test submission reached Mailchimp, but no double-opt-in email was observed; confirm whether double opt-in is enabled for the audience and whether the "check your email" success copy matches reality.
