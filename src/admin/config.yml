@@ -324,10 +324,13 @@ collections:
               - { name: shortLabel, label: Short label (mobile), widget: string }
               - { name: url, label: URL, widget: string }
           - name: photos
-            label: Homepage photo band
+            label: Homepage highlight photos
             label_singular: Photo
             widget: list
+            summary: "{{fields.caption}}"
+            hint: "Two photos shown on the homepage — the most recent meeting and competition highlights. Upload a photo for each; images are optimized automatically."
             fields:
+              - { name: caption, label: Caption (shown on the photo), widget: string, hint: "e.g. Most recent meeting" }
               - { name: src, label: Photo, widget: image, required: false }
-              - { name: alt, label: Alt text, widget: string, required: false }
-              - { name: placeholder, label: Placeholder text (shown when no photo), widget: string }
+              - { name: alt, label: Alt text (for screen readers), widget: string, required: false, hint: "Describe the photo; falls back to the caption if left blank." }
+              - { name: placeholder, label: Placeholder text (shown until a photo is added), widget: string }

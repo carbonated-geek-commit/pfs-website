@@ -108,9 +108,15 @@ permalink: /
   <div class="photo-band__inner container">
     {% for photo in site.photos %}
     {% if photo.src %}
-    <figure class="photo-band__photo"><img src="{{ photo.src }}" alt="{{ photo.alt }}"></figure>
+    <figure class="photo-band__photo">
+      <img src="{{ photo.src }}" alt="{{ photo.alt or photo.caption }}">
+      {% if photo.caption %}<figcaption class="photo-band__caption">{{ photo.caption }}</figcaption>{% endif %}
+    </figure>
     {% else %}
-    <div class="photo-band__slot" role="img" aria-label="Photo placeholder">{{ photo.placeholder }}</div>
+    <div class="photo-band__slot" role="img" aria-label="{{ photo.alt or photo.caption or 'Photo placeholder' }}">
+      {% if photo.caption %}<span class="photo-band__slot-label">{{ photo.caption }}</span>{% endif %}
+      <span class="photo-band__slot-hint">{{ photo.placeholder }}</span>
+    </div>
     {% endif %}
     {% endfor %}
   </div>

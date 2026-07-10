@@ -61,14 +61,16 @@
   ],
   "photos": [
     {
+      "caption": "Most recent meeting",
       "src": "/assets/img/uploads/screenshot-2026-07-10-115853crop.webp",
       "alt": "",
-      "placeholder": "Photo from a recent meeting"
+      "placeholder": "Add a photo from the most recent meeting"
     },
     {
+      "caption": "Competition highlights",
       "src": "/assets/img/uploads/screenshot-2026-07-10-115940.webp",
       "alt": "",
-      "placeholder": "Photo — competition, brew day, tasting"
+      "placeholder": "Add a competition highlight photo"
     }
   ]
 }
