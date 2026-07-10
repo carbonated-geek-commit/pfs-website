@@ -863,7 +863,11 @@ img { max-width: 100%; }
   padding: 5px 10px;
   white-space: nowrap;
 }
-.members-banner__text { font-size: 15px; flex: 1; }
+.members-banner__body { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.members-banner__text { font-size: 15px; }
+.members-banner__actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.members-banner__join { color: var(--cream-on-dark); font-size: 14px; text-decoration: underline; text-decoration-color: rgba(243, 236, 217, 0.4); white-space: nowrap; }
+.members-banner__join:hover { color: #fff; }
 
 /* Library -------------------------------------------------------------------------------- */
 
@@ -1191,7 +1195,6 @@ a.collection__row:hover { background: var(--cream); color: inherit; }
 }
 .welcome__actions { display: flex; gap: 10px; width: 100%; }
 .welcome__actions .btn { flex: 1; letter-spacing: 0.1em; padding: 13px 16px; white-space: normal; }
-.welcome__actions .btn--outline-ink { border-width: 1.5px; padding: 11.5px 16px; }
 .welcome__later {
   background: transparent;
   border: none;
@@ -1366,7 +1369,8 @@ a.collection__row:hover { background: var(--cream); color: inherit; }
 
   /* Members banner */
   .members-banner__inner { flex-wrap: wrap; gap: 10px; padding-top: 12px; padding-bottom: 12px; }
-  .members-banner__text { font-size: 13.5px; flex-basis: 100%; order: 3; }
+  .members-banner__body { flex-basis: 100%; }
+  .members-banner__text { font-size: 13.5px; }
 
   /* Library → accordion */
   .library__inner { grid-template-columns: 1fr; padding-top: 20px; padding-bottom: 40px; gap: 10px; }

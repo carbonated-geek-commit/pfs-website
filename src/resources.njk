@@ -16,8 +16,13 @@ permalink: /resources/
 <div class="members-banner">
   <div class="members-banner__inner container">
     <span class="members-banner__chip">Members Only</span>
-    <span class="members-banner__text">Downloads require a member sign-in — file links are no longer public, and folder metadata stays private.</span>
-    <a class="btn btn--cream members-banner__signin" href="{{ site.memberSignInUrl }}" data-analytics="member_signin_click">Member Sign-In</a>
+    <div class="members-banner__body">
+      <span class="members-banner__text">These files are open to current PFS members. When you open one, Google asks you to sign in — if you're a member, it opens. Not seeing what you expect?</span>
+      <div class="members-banner__actions">
+        <a class="btn btn--cream members-banner__signin" href="{{ site.requestAccessUrl }}" data-analytics="request_access_click">Request access</a>
+        <a class="members-banner__join" href="/join/">Not a member yet? Join the Society →</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -35,7 +40,7 @@ permalink: /resources/
       </button>
       <div class="collection__body">
         {% for doc in col.items %}
-        {{ fileRow(doc, col.title, site.memberSignInUrl) }}
+        {{ fileRow(doc, col.title, site.requestAccessUrl) }}
         {% endfor %}
       </div>
     </div>

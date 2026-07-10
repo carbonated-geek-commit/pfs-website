@@ -264,7 +264,7 @@ collections:
           # Preserved on save but not editable by officers
           - name: analyticsId
             widget: hidden
-          - name: memberSignInUrl
+          - name: requestAccessUrl
             widget: hidden
           - name: meeting
             label: Regular meeting
