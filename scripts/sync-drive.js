@@ -56,8 +56,12 @@ const FOLDERS = [
     blurb: 'Award-winning and club-favorite recipes shared by members.' },
   { id: '1EqvDVBeAzrYlgGv7ifJyP18O7Jzv1dCW', kind: 'library',  access: 'public',  title: 'Presentations',
     blurb: 'Slides from past monthly education sessions.' },
-  { id: 'REPLACE_MEMBERS_FOLDER_ID',         kind: 'library',  access: 'members', title: 'Members Only',
-    blurb: 'Rosters, contact lists, and documents for current members.' },
+  // Uncomment once the restricted Drive folder exists and its id is dropped in.
+  // Left commented so the sync (and the scheduled workflow) runs clean today —
+  // an active REPLACE_ id would abort every run. GATED stays true, so this arms
+  // itself the moment a real id is filled in.
+  // { id: 'REPLACE_MEMBERS_FOLDER_ID',         kind: 'library',  access: 'members', title: 'Members Only',
+  //   blurb: 'Rosters, contact lists, and documents for current members.' },
 ];
 
 const DATA_DIR = path.join(__dirname, '..', 'src', '_data');

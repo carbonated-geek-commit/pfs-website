@@ -86,7 +86,7 @@ A static site cannot enforce login; **Google Drive is the gate**. When someone o
 
 ## Still pending
 
-1. **Members folder id**: create the "Members Only" Drive folder, restrict it, share it to the service account (Viewer), and replace `REPLACE_MEMBERS_FOLDER_ID` in `FOLDERS`. Until then the sync's REPLACE_ guard blocks every run. `GATED` is already `true`, so once the id lands and a clean sync runs, that folder's files publish as real per-file links (Drive-enforced) and the rest stay draped/public as configured. The `GDRIVE_SA_KEY` GitHub secret must also exist for CI runs.
+1. **Members folder id**: create the "Members Only" Drive folder, restrict it, share it to the service account (Viewer), then **uncomment** its entry in `FOLDERS` and drop in the real id (it's currently commented out so the sync runs clean while the folder doesn't exist — an active `REPLACE_` id would abort every run, including the scheduled workflow). `GATED` is already `true`, so once the id lands and a clean sync runs, that folder's files publish as real per-file links (Drive-enforced) and the rest stay public as configured. The `GDRIVE_SA_KEY` GitHub secret must also exist for CI runs.
 2. **Enable the sync cron**: uncomment the `schedule:` block in `sync-content.yml` once the members folder id is in and a manual run is verified.
 3. **Photos**: committee headshots, homepage photo band, merch product photos (upload via the CMS — they become optimized `.webp`).
 4. **2025 competition winners table** — placeholder card on /competitions/ keeps the `#results-2025` anchor; source page had a redirect issue.
