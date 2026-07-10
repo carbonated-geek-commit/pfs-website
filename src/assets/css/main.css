@@ -796,6 +796,10 @@ img { max-width: 100%; }
   opacity: 0.65;
 }
 .sched-row__value { font-size: 16px; line-height: 1.4; }
+/* Style/challenge links inherit the row's text colour (legible on every row
+   state) and use an amber underline to signal they're clickable. */
+.sched-row__value a { color: inherit; text-decoration: underline; text-decoration-color: var(--amber); text-underline-offset: 2px; }
+.sched-row__value a:hover { text-decoration-color: currentColor; }
 
 /* Minutes --------------------------------------------------------------------------- */
 

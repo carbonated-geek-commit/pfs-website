@@ -29,11 +29,11 @@ permalink: /meetings/
         </div>
         <div class="sched-row__cell">
           <span class="sched-row__label">Style Discussion</span>
-          <span class="sched-row__value">{{ mtg.style.text }}</span>
+          <span class="sched-row__value">{% if mtg.style.home.linkUrl %}<a href="{{ mtg.style.home.linkUrl }}" target="_blank" rel="noopener">{{ mtg.style.text }}</a>{% else %}{{ mtg.style.text }}{% endif %}</span>
         </div>
         <div class="sched-row__cell">
           <span class="sched-row__label">Ferment-to-Style</span>
-          <span class="sched-row__value">{{ mtg.challenge.text }}</span>
+          <span class="sched-row__value">{% if mtg.challenge.home.linkUrl %}<a href="{{ mtg.challenge.home.linkUrl }}" target="_blank" rel="noopener">{{ mtg.challenge.text }}</a>{% else %}{{ mtg.challenge.text }}{% endif %}</span>
         </div>
       </div>
     </div>
