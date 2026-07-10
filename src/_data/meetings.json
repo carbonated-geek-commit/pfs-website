@@ -3,10 +3,22 @@
     "date": "2026-09-01",
     "education": "How To Judge",
     "style": {
-      "text": "21B: Specialty IPA's"
+      "text": "21B: Specialty IPA's",
+      "home": {
+        "before": "",
+        "linkText": "",
+        "linkUrl": "https://www.bjcp.org/beer-styles/21b-specialty-ipa-new-england-ipa/",
+        "after": ""
+      }
     },
     "challenge": {
-      "text": "Cider — BJCP C1–C4"
+      "text": "27A: Kentucky Common",
+      "home": {
+        "before": "",
+        "linkText": "",
+        "linkUrl": "https://www.bjcp.org/style/2021/27/27A/historical-beer-kentucky-common/",
+        "after": ""
+      }
     }
   },
   {
