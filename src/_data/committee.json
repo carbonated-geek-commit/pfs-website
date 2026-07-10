@@ -1,26 +1,91 @@
 {
   "current": [
-    { "role": "President", "name": "Phillip Saurer", "email": "president@peninsulafermentation.org" },
-    { "role": "Vice President", "name": "Lou Strowger", "email": "vice@peninsulafermentation.org" },
-    { "role": "Treasurer", "name": "Jennifer Saurer", "email": "treasurer@peninsulafermentation.org" },
-    { "role": "Secretary", "name": "Rob Baysden", "email": "secretary@peninsulafermentation.org" },
-    { "role": "Grand Hydrometer", "name": "Corey Shoemaker", "email": "hydrometer@peninsulafermentation.org" },
-    { "role": "Event Coordinator", "name": null, "email": "events@peninsulafermentation.org", "vacant": true },
-    { "role": "Communications Director", "name": null, "email": "comms@peninsulafermentation.org", "vacant": true }
+    {
+      "role": "President",
+      "name": "Phillip Saurer",
+      "email": "president@peninsulafermentation.org",
+      "photo": "/assets/img/uploads/screenshot-2026-07-10-120012.webp"
+    },
+    {
+      "role": "Vice President",
+      "name": "Lou Strowger",
+      "email": "vice@peninsulafermentation.org",
+      "photo": "/assets/img/uploads/screenshot-2026-07-10-120210.webp"
+    },
+    {
+      "role": "Treasurer",
+      "name": "Jennifer Saurer",
+      "email": "treasurer@peninsulafermentation.org"
+    },
+    {
+      "role": "Secretary",
+      "name": "Rob Baysden",
+      "email": "secretary@peninsulafermentation.org"
+    },
+    {
+      "role": "Grand Hydrometer",
+      "name": "Corey Shoemaker",
+      "email": "hydrometer@peninsulafermentation.org"
+    },
+    {
+      "role": "Event Coordinator",
+      "name": "",
+      "email": "events@peninsulafermentation.org",
+      "vacant": true
+    },
+    {
+      "role": "Communications Director",
+      "name": "",
+      "email": "comms@peninsulafermentation.org",
+      "vacant": true
+    }
   ],
   "past": [
-    { "year": 2025, "officers": [
-      { "role": "President", "name": "Rob Baysden" },
-      { "role": "Vice President", "name": "Corey Shoemaker" },
-      { "role": "Treasurer", "name": "Jennifer Saurer" },
-      { "role": "Secretary", "name": "Phillip Saurer" }
-    ]},
-    { "year": 2024, "officers": [
-      { "role": "President", "name": "Phillip Saurer" },
-      { "role": "Vice President", "name": "Mark Lowe" },
-      { "role": "Treasurer", "name": "Jennifer Saurer" },
-      { "role": "Secretary", "name": "Rob Baysden" },
-      { "role": "Grand Hydrometer", "name": "Enid Lints" }
-    ]}
+    {
+      "year": 2025,
+      "officers": [
+        {
+          "role": "President",
+          "name": "Rob Baysden"
+        },
+        {
+          "role": "Vice President",
+          "name": "Corey Shoemaker"
+        },
+        {
+          "role": "Treasurer",
+          "name": "Jennifer Saurer"
+        },
+        {
+          "role": "Secretary",
+          "name": "Phillip Saurer"
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "officers": [
+        {
+          "role": "President",
+          "name": "Phillip Saurer"
+        },
+        {
+          "role": "Vice President",
+          "name": "Mark Lowe"
+        },
+        {
+          "role": "Treasurer",
+          "name": "Jennifer Saurer"
+        },
+        {
+          "role": "Secretary",
+          "name": "Rob Baysden"
+        },
+        {
+          "role": "Grand Hydrometer",
+          "name": "Enid Lints"
+        }
+      ]
+    }
   ]
 }
