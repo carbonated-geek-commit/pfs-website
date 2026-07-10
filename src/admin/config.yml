@@ -13,17 +13,18 @@ media_folder: src/assets/img/uploads
 public_folder: /assets/img/uploads
 
 media_libraries:
-  all:
-    max_file_size: 10485760 # 10 MB
-    slugify_filename: true
-    transformations:
-      raster_image:
-        format: webp # JPEG/PNG uploads are converted in the browser before commit
-        quality: 85
-        width: 1600 # bounding box — larger images scale down, smaller pass through
-        height: 1600
-      svg:
-        optimize: true
+  default:
+    config:
+      max_file_size: 10485760 # 10 MB
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp # JPEG/PNG uploads are converted in the browser before commit
+          quality: 85
+          width: 1600 # bounding box — larger images scale down, smaller pass through
+          height: 1600
+        svg:
+          optimize: true
 
 collections:
   - name: schedule
