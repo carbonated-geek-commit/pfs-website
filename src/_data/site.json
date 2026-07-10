@@ -6,11 +6,8 @@
   "email": "info@peninsulafermentation.org",
   "established": "2023",
   "copyrightYear": "2026",
-
   "analyticsId": "G-87NR82BFF4",
-
   "requestAccessUrl": "mailto:info@peninsulafermentation.org",
-
   "meeting": {
     "cadence": "First Tuesday, monthly",
     "time": "6:30 – 8:30 PM",
@@ -21,7 +18,6 @@
     "addressShort": "Moment Brewing · 10876 Myhre Pl NW, Silverdale",
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Moment+Brewing+10876+Myhre+Pl+NW+Suite+112+Silverdale+WA+98383"
   },
-
   "venueBanner": {
     "show": true,
     "longLead": "Starting October 6, 2026, monthly meetings move to",
@@ -29,26 +25,50 @@
     "venueName": "Rainy Daze Brewing",
     "venueUrl": "https://rainydazebrewing.com/"
   },
-
   "competition": {
     "entryUrl": "https://brewingcompetitions.com/pfsamericanhbc/"
   },
-
   "social": {
     "facebook": "https://www.facebook.com/peninsulafermentationsociety/",
     "instagram": "https://www.instagram.com/peninsulafermentationsociety/"
   },
-
   "community": [
-    { "label": "American Homebrewers Assoc.", "shortLabel": "AHA", "url": "https://www.homebrewersassociation.org/" },
-    { "label": "WA Homebrew Assoc.", "shortLabel": "WA Homebrew Assoc.", "url": "https://www.wahomebrewers.org" },
-    { "label": "BJCP", "shortLabel": "BJCP", "url": "https://www.bjcp.org/" },
-    { "label": "Moment Brewing", "shortLabel": "Moment Brewing", "url": "http://www.momentbrewing.com" },
-    { "label": "Olympic Homebrew Supply", "shortLabel": "Olympic Homebrew Supply", "url": "https://www.olybrew.com" }
+    {
+      "label": "American Homebrewers Assoc.",
+      "shortLabel": "AHA",
+      "url": "https://www.homebrewersassociation.org/"
+    },
+    {
+      "label": "WA Homebrew Assoc.",
+      "shortLabel": "WA Homebrew Assoc.",
+      "url": "https://www.wahomebrewers.org"
+    },
+    {
+      "label": "BJCP",
+      "shortLabel": "BJCP",
+      "url": "https://www.bjcp.org/"
+    },
+    {
+      "label": "Moment Brewing",
+      "shortLabel": "Moment Brewing",
+      "url": "http://www.momentbrewing.com"
+    },
+    {
+      "label": "Olympic Homebrew Supply",
+      "shortLabel": "Olympic Homebrew Supply",
+      "url": "https://www.olybrew.com"
+    }
   ],
-
   "photos": [
-    { "src": "", "alt": "", "placeholder": "Photo from a recent meeting" },
-    { "src": "", "alt": "", "placeholder": "Photo — competition, brew day, tasting" }
+    {
+      "src": "/assets/img/uploads/screenshot-2026-07-10-115853.webp",
+      "alt": "",
+      "placeholder": "Photo from a recent meeting"
+    },
+    {
+      "src": "/assets/img/uploads/screenshot-2026-07-10-115940.webp",
+      "alt": "",
+      "placeholder": "Photo — competition, brew day, tasting"
+    }
   ]
 }
